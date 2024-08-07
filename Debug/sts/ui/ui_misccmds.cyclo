@@ -1,0 +1,4 @@
+../sts/ui/ui_misccmds.c:11:6:register_ui_commands	1
+../sts/ui/ui_misccmds.c:27:6:execute_command	3
+../sts/ui/ui_misccmds.c:41:6:simple_command	1
+../sts/ui/ui_misccmds.c:47:6:help_command	2

@@ -1,0 +1,4 @@
+"./sts/arch/arm/init_arm.o"
+"./sts/arch/arm/lib_printf.o"
+"./sts/main/sts_main.o"
+"./sts/ui/ui_commands.o"
