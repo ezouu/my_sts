@@ -7,8 +7,8 @@
 
 typedef struct {
     const char *name;
-    void (*function)();
-} Command;
+    void (*function)(int argc, char *argv[]);
+} CommandWithArgs;
 
 void register_ui_commands();
 
@@ -19,7 +19,7 @@ void help_command();
 void execute_command(char *command_name);
 
 
-extern Command command_list[];
+extern CommandWithArgs command_list[];
 extern const int COMMAND_COUNT;
 
 

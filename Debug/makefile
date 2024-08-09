@@ -60,8 +60,8 @@ all: main-build
 main-build: test_cfe.elf secondary-outputs
 
 # Tool invocations
-test_cfe.elf test_cfe.map: $(OBJS) $(USER_OBJS) /Users/eddiezou/STM32CubeIDE/workspace_1.15.1/test_cfe/STM32L476ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "test_cfe.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/eddiezou/STM32CubeIDE/workspace_1.15.1/test_cfe/STM32L476ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="test_cfe.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+test_cfe.elf test_cfe.map: $(OBJS) $(USER_OBJS) /Users/eddiezou/STM32CubeIDE/workspace_1.15.1/test_cfe/STM32L476ZGTX_RAM.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "test_cfe.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/eddiezou/STM32CubeIDE/workspace_1.15.1/test_cfe/STM32L476ZGTX_RAM.ld" --specs=nosys.specs -Wl,-Map="test_cfe.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

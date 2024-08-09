@@ -134,33 +134,11 @@ Reset_Handler:
   str   r1, [r0]
 
   ldr   r0, L__usart_isr
-1:
-  ldr   r1, [r0]
-  and   r1,  1<<7
-  cmp   r1,  1<<7
-  bne   1b
-
 
      /*uart, tx data */
   ldr   r0, L__usart_tdr
   mov   r1, 0x59
   str   r1, [r0]
-
-
-
-  ldr   r0, L__usart_isr
-1:
-  ldr   r1, [r0]
-  and   r1, 1<<7
-  cmp   r1, 1<<7
-  bne   1b
-
-  ldr   r0, L__usart_tdr
-  mov   r1, 0x58
-  str   r1, [r0]
-  mov r0, #1
-  mov r1, #2
-
 
 compute:
   add r2, r1, r0

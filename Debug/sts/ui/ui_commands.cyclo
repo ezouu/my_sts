@@ -1,0 +1,8 @@
+../sts/ui/ui_commands.c:11:6:register_ui_commands	1
+../sts/ui/ui_commands.c:37:7:split_string	4
+../sts/ui/ui_commands.c:56:6:execute_command	5
+../sts/ui/ui_commands.c:77:6:simple_command	2
+../sts/ui/ui_commands.c:86:6:help_command	2
+../sts/ui/ui_commands.c:94:6:ui_cmd_display	2
+../sts/ui/ui_commands.c:115:6:ui_cmd_edit	1
+../sts/ui/ui_commands.c:148:6:LED_Init	1
