@@ -1,4 +1,3 @@
-
 .syntax unified
 .cpu cortex-m4
 .fpu softvfp
@@ -134,11 +133,48 @@ Reset_Handler:
   str   r1, [r0]
 
   ldr   r0, L__usart_isr
+1:
+  ldr   r1, [r0]
+  and   r1,  1<<7
+  cmp   r1,  1<<7
+  bne   1b
 
-     /*uart, tx data */
+
+     /*uart, tx data
   ldr   r0, L__usart_tdr
   mov   r1, 0x59
   str   r1, [r0]
+
+
+
+  ldr   r0, L__usart_isr
+1:
+  ldr   r1, [r0]
+  and   r1, 1<<7
+  cmp   r1, 1<<7
+  bne   1b
+
+  ldr   r0, L__usart_tdr
+  mov   r1, 0x58
+  str   r1, [r0]
+  mov r0, #1
+  mov r1, #2
+*/
+
+     /*uart, tx data */
+  ldr   r0, L__usart_tdr
+  mov   r1, 0x0A  // Changed from 0x59 (Y) to 0x0A (newline)
+  str   r1, [r0]
+
+  ldr   r0, L__usart_isr
+1:
+  ldr   r1, [r0]
+  and   r1, 1<<7
+  cmp   r1, 1<<7
+  bne   1b
+
+  mov r0, #1
+  mov r1, #2
 
 compute:
   add r2, r1, r0
@@ -395,16 +431,3 @@ USART1_IRQHandler:
 	pop {r0-r12, lr}
 
     bx lr
-
-
-
-
-
-
-
-
-
-
-
-
-
