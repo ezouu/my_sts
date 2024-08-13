@@ -1,5 +1,6 @@
 
 #include <ui_commands.h>
+#include <gpio.h>
 /*
 void simple_command();
 void help_command();
@@ -153,20 +154,17 @@ void ui_cmd_edit(int argc, char *argv[])
 
 void LED_Init(void) {
 
-    *(volatile uint32_t *)(0x40007004) = 0x200;
-
-    volatile uint32_t *RCC_AHB2ENR = (uint32_t *)(0x40021000 + 0x4C);
-    *RCC_AHB2ENR = 0xf;
+    //RCC_TypeDef *RCC = (RCC_TypeDef *)0x40021000;
 
 
-    volatile uint32_t *RCC_APB1ENR1 = (uint32_t *)(0x40021000 + 0x58);
-    *RCC_APB1ENR1 |= (1 << 28);
+    RCC->AHB2ENR |= (1 << 2);
+
+    RCC->APB1ENR1 |= (1 << 28);
+
+    *(volatile uint32_t *)(GPIOC_BASE) = 0x4;
 
 
-    *(volatile uint32_t *)(GPIOC_BASE) = 0x4; // turn on
-
-
-    *(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0; // turn off
+    *(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
 }
 
 
