@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000000d8  20000000  20000000  00001000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00001774  200000d8  200000d8  000010d8  2**2
+  1 .text         00001724  200000d8  200000d8  000010d8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000002f8  2000184c  2000184c  0000284c  2**2
+  2 .rodata       000002f8  200017fc  200017fc  000027fc  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  20001b44  20001b44  00002be4  2**0
+  3 .ARM.extab    00000000  20001af4  20001af4  00002b94  2**0
                   CONTENTS
-  4 .ARM          00000008  20001b44  20001b44  00002b44  2**2
+  4 .ARM          00000008  20001af4  20001af4  00002af4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  20001b4c  20001be4  00002be4  2**0
+  5 .preinit_array 00000000  20001afc  20001b94  00002b94  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  20001b4c  20001b4c  00002b4c  2**2
+  6 .init_array   00000004  20001afc  20001afc  00002afc  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  20001b50  20001b50  00002b50  2**2
+  7 .fini_array   00000004  20001b00  20001b00  00002b00  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         00000090  20001b54  20001b54  00002b54  2**2
+  8 .data         00000090  20001b04  20001b04  00002b04  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000154  20001be4  20001be4  00002be4  2**2
+  9 .bss          00000154  20001b94  20001b94  00002b94  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20001d38  20001d38  00002be4  2**0
+ 10 ._user_heap_stack 00000600  20001ce8  20001ce8  00002b94  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  00002be4  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  00002b94  2**0
                   CONTENTS, READONLY
- 12 .debug_line   00001851  00000000  00000000  00002c14  2**0
+ 12 .debug_line   0000184c  00000000  00000000  00002bc4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_line_str 00000058  00000000  00000000  00004465  2**0
+ 13 .debug_line_str 00000058  00000000  00000000  00004410  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_info   00000f27  00000000  00000000  000044bd  2**0
+ 14 .debug_info   0000127a  00000000  00000000  00004468  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 000005c5  00000000  00000000  000053e4  2**0
+ 15 .debug_abbrev 000005c5  00000000  00000000  000056e2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000150  00000000  00000000  000059b0  2**3
+ 16 .debug_aranges 00000150  00000000  00000000  00005ca8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000042fc  00000000  00000000  00005b00  2**0
+ 17 .debug_str    0000462c  00000000  00000000  00005df8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_rnglists 000000f2  00000000  00000000  00009dfc  2**0
+ 18 .debug_rnglists 000000f2  00000000  00000000  0000a424  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_macro  00001126  00000000  00000000  00009eee  2**0
+ 19 .debug_macro  0000113c  00000000  00000000  0000a516  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0000b014  2**0
+ 20 .comment      00000043  00000000  00000000  0000b652  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000068c  00000000  00000000  0000b058  2**2
+ 21 .debug_frame  0000068c  00000000  00000000  0000b698  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -62,9 +62,9 @@ Disassembly of section .text:
 200000ea:	2301      	movs	r3, #1
 200000ec:	7023      	strb	r3, [r4, #0]
 200000ee:	bd10      	pop	{r4, pc}
-200000f0:	20001be4 	.word	0x20001be4
+200000f0:	20001b94 	.word	0x20001b94
 200000f4:	00000000 	.word	0x00000000
-200000f8:	20001834 	.word	0x20001834
+200000f8:	200017e4 	.word	0x200017e4
 
 200000fc <frame_dummy>:
 200000fc:	b508      	push	{r3, lr}
@@ -75,8 +75,8 @@ Disassembly of section .text:
 20000106:	f3af 8000 	nop.w
 2000010a:	bd08      	pop	{r3, pc}
 2000010c:	00000000 	.word	0x00000000
-20000110:	20001be8 	.word	0x20001be8
-20000114:	20001834 	.word	0x20001834
+20000110:	20001b98 	.word	0x20001b98
+20000114:	200017e4 	.word	0x200017e4
 
 20000118 <SysTick_Handler>:
 .section .text
@@ -653,9 +653,9 @@ bl sts_main
  ldr   sp, =_estack    /* Set stack pointer */
 2000056c:	20018000 	.word	0x20018000
   ldr r2, =_sbss
-20000570:	20001be4 	.word	0x20001be4
+20000570:	20001b94 	.word	0x20001b94
   ldr r4, =_ebss
-20000574:	20001d38 	.word	0x20001d38
+20000574:	20001ce8 	.word	0x20001ce8
 
 20000578 <__atox>:
     *  Return Value:
@@ -1547,8 +1547,8 @@ int xvsprintf(char *outbuf,const char *templat,va_list marker)
 20000b84:	657b      	str	r3, [r7, #84]	@ 0x54
 			break;
 20000b86:	e01f      	b.n	20000bc8 <xvsprintf+0x4e0>
-20000b88:	20001a1c 	.word	0x20001a1c
-20000b8c:	2000184c 	.word	0x2000184c
+20000b88:	200019cc 	.word	0x200019cc
+20000b8c:	200017fc 	.word	0x200017fc
 			ulx = va_arg(marker,unsigned long long);
 20000b90:	687b      	ldr	r3, [r7, #4]
 20000b92:	3307      	adds	r3, #7
@@ -1841,8 +1841,8 @@ int xvsprintf(char *outbuf,const char *templat,va_list marker)
 20000d6e:	46bd      	mov	sp, r7
 20000d70:	bdb0      	pop	{r4, r5, r7, pc}
 20000d72:	bf00      	nop
-20000d74:	20001a1c 	.word	0x20001a1c
-20000d78:	20001a30 	.word	0x20001a30
+20000d74:	200019cc 	.word	0x200019cc
+20000d78:	200019e0 	.word	0x200019e0
 
 20000d7c <printf>:
     *  Return value:
@@ -2071,11 +2071,11 @@ void poll_for_input(char *buffer, int size) {
 20000ed2:	46bd      	mov	sp, r7
 20000ed4:	bd80      	pop	{r7, pc}
 20000ed6:	bf00      	nop
-20000ed8:	20001868 	.word	0x20001868
-20000edc:	20001870 	.word	0x20001870
-20000ee0:	20001874 	.word	0x20001874
-20000ee4:	2000187c 	.word	0x2000187c
-20000ee8:	20001898 	.word	0x20001898
+20000ed8:	20001818 	.word	0x20001818
+20000edc:	20001820 	.word	0x20001820
+20000ee0:	20001824 	.word	0x20001824
+20000ee4:	2000182c 	.word	0x2000182c
+20000ee8:	20001848 	.word	0x20001848
 
 20000eec <sts_main>:
 
@@ -2110,7 +2110,7 @@ void sts_main(int a, int b) {
 20000f12:	bf00      	nop
 20000f14:	e7ef      	b.n	20000ef6 <sts_main+0xa>
 20000f16:	bf00      	nop
-20000f18:	20001870 	.word	0x20001870
+20000f18:	20001820 	.word	0x20001820
 
 20000f1c <getc>:
 	}
@@ -2349,8 +2349,8 @@ void execute_command(char *input_buffer) {
 200010c6:	46bd      	mov	sp, r7
 200010c8:	bd80      	pop	{r7, pc}
 200010ca:	bf00      	nop
-200010cc:	20001b54 	.word	0x20001b54
-200010d0:	200018d8 	.word	0x200018d8
+200010cc:	20001b04 	.word	0x20001b04
+200010d0:	20001888 	.word	0x20001888
 
 200010d4 <simple_command>:
 
@@ -2390,8 +2390,8 @@ void simple_command(int argc, char *argv[]) {
 2000110a:	46bd      	mov	sp, r7
 2000110c:	bd80      	pop	{r7, pc}
 2000110e:	bf00      	nop
-20001110:	200018f0 	.word	0x200018f0
-20001114:	2000190c 	.word	0x2000190c
+20001110:	200018a0 	.word	0x200018a0
+20001114:	200018bc 	.word	0x200018bc
 
 20001118 <help_command>:
 
@@ -2429,9 +2429,9 @@ void help_command(int argc, char *argv[]) {
 2000114e:	3710      	adds	r7, #16
 20001150:	46bd      	mov	sp, r7
 20001152:	bd80      	pop	{r7, pc}
-20001154:	2000191c 	.word	0x2000191c
-20001158:	20001b54 	.word	0x20001b54
-2000115c:	20001934 	.word	0x20001934
+20001154:	200018cc 	.word	0x200018cc
+20001158:	20001b04 	.word	0x20001b04
+2000115c:	200018e4 	.word	0x200018e4
 
 20001160 <ui_cmd_display>:
 
@@ -2455,7 +2455,7 @@ void ui_cmd_display(int argc, char *argv[]) {
 20001176:	2200      	movs	r2, #0
 20001178:	2100      	movs	r1, #0
 2000117a:	69b8      	ldr	r0, [r7, #24]
-2000117c:	f000 fb50 	bl	20001820 <strtoul>
+2000117c:	f000 fb28 	bl	200017d0 <strtoul>
 20001180:	4603      	mov	r3, r0
 20001182:	61fb      	str	r3, [r7, #28]
 
@@ -2497,8 +2497,8 @@ void ui_cmd_display(int argc, char *argv[]) {
 200011b2:	3720      	adds	r7, #32
 200011b4:	46bd      	mov	sp, r7
 200011b6:	bd80      	pop	{r7, pc}
-200011b8:	2000193c 	.word	0x2000193c
-200011bc:	2000195c 	.word	0x2000195c
+200011b8:	200018ec 	.word	0x200018ec
+200011bc:	2000190c 	.word	0x2000190c
 
 200011c0 <ui_cmd_edit>:
 
@@ -2522,7 +2522,7 @@ void ui_cmd_edit(int argc, char *argv[])
 200011d0:	2200      	movs	r2, #0
 200011d2:	2100      	movs	r1, #0
 200011d4:	69f8      	ldr	r0, [r7, #28]
-200011d6:	f000 fb23 	bl	20001820 <strtoul>
+200011d6:	f000 fafb 	bl	200017d0 <strtoul>
 200011da:	4603      	mov	r3, r0
 200011dc:	61bb      	str	r3, [r7, #24]
 
@@ -2549,7 +2549,7 @@ void ui_cmd_edit(int argc, char *argv[])
 200011f8:	2200      	movs	r2, #0
 200011fa:	2100      	movs	r1, #0
 200011fc:	68f8      	ldr	r0, [r7, #12]
-200011fe:	f000 fb0f 	bl	20001820 <strtoul>
+200011fe:	f000 fae7 	bl	200017d0 <strtoul>
 20001202:	4603      	mov	r3, r0
 20001204:	60bb      	str	r3, [r7, #8]
 
@@ -2576,13 +2576,10 @@ void ui_cmd_edit(int argc, char *argv[])
 2000121e:	46bd      	mov	sp, r7
 20001220:	bd80      	pop	{r7, pc}
 20001222:	bf00      	nop
-20001224:	2000196c 	.word	0x2000196c
-20001228:	2000198c 	.word	0x2000198c
+20001224:	2000191c 	.word	0x2000191c
+20001228:	2000193c 	.word	0x2000193c
 
 2000122c <LED_Init>:
-#define GPIOA_BASE 0x48000000
-#define GPIOB_BASE 0x48000400
-#define GPIOC_BASE 0x48000800
 
 
 void LED_Init(void) {
@@ -2606,16 +2603,20 @@ void LED_Init(void) {
 20001242:	f043 5380 	orr.w	r3, r3, #268435456	@ 0x10000000
 20001246:	6593      	str	r3, [r2, #88]	@ 0x58
 
-    *(volatile uint32_t *)(GPIOC_BASE) = 0x4;
+    //*(volatile uint32_t *)(GPIOC_BASE) = 0x4;
+    GPIOC->GPIOx_MODER = 0x4;
 20001248:	4b06      	ldr	r3, [pc, #24]	@ (20001264 <LED_Init+0x38>)
 2000124a:	2204      	movs	r2, #4
 2000124c:	601a      	str	r2, [r3, #0]
 
 
-    *(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
-2000124e:	4b06      	ldr	r3, [pc, #24]	@ (20001268 <LED_Init+0x3c>)
+    //*(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
+    GPIOC->GPIOx_PUPDR = 0x0;
+2000124e:	4b05      	ldr	r3, [pc, #20]	@ (20001264 <LED_Init+0x38>)
 20001250:	2200      	movs	r2, #0
-20001252:	601a      	str	r2, [r3, #0]
+20001252:	60da      	str	r2, [r3, #12]
+
+
 }
 20001254:	bf00      	nop
 20001256:	46bd      	mov	sp, r7
@@ -2624,851 +2625,872 @@ void LED_Init(void) {
 2000125e:	bf00      	nop
 20001260:	40021000 	.word	0x40021000
 20001264:	48000800 	.word	0x48000800
-20001268:	48000814 	.word	0x48000814
 
-2000126c <I2C_Init>:
+20001268 <I2C_Init>:
 
 
 void I2C_Init(void) {
-2000126c:	b480      	push	{r7}
-2000126e:	af00      	add	r7, sp, #0
-
-
+20001268:	b480      	push	{r7}
+2000126a:	af00      	add	r7, sp, #0
 
     // Transmit
-    *(volatile uint32_t *)(0x40005400) = 0; // I2C_CR1, clear
-20001270:	4b0e      	ldr	r3, [pc, #56]	@ (200012ac <I2C_Init+0x40>)
-20001272:	2200      	movs	r2, #0
-20001274:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005410) = 0x20303e5d; // I2C timing configuration
-20001276:	4b0e      	ldr	r3, [pc, #56]	@ (200012b0 <I2C_Init+0x44>)
-20001278:	4a0e      	ldr	r2, [pc, #56]	@ (200012b4 <I2C_Init+0x48>)
-2000127a:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005408) = 0; // I2C OAR1 configuration
-2000127c:	4b0e      	ldr	r3, [pc, #56]	@ (200012b8 <I2C_Init+0x4c>)
-2000127e:	2200      	movs	r2, #0
-20001280:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
-20001282:	4b0d      	ldr	r3, [pc, #52]	@ (200012b8 <I2C_Init+0x4c>)
-20001284:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
-20001288:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005404) = 0; // I2C CR2 configuration
-2000128a:	4b0c      	ldr	r3, [pc, #48]	@ (200012bc <I2C_Init+0x50>)
-2000128c:	2200      	movs	r2, #0
-2000128e:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40004404) = 0x2008000; // Auto end, bit 15, NACK
-20001290:	4b0b      	ldr	r3, [pc, #44]	@ (200012c0 <I2C_Init+0x54>)
-20001292:	4a0c      	ldr	r2, [pc, #48]	@ (200012c4 <I2C_Init+0x58>)
-20001294:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4000540C) = 0; // I2C OAR2 configuration
-20001296:	4b0c      	ldr	r3, [pc, #48]	@ (200012c8 <I2C_Init+0x5c>)
-20001298:	2200      	movs	r2, #0
-2000129a:	601a      	str	r2, [r3, #0]
-
-    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
-2000129c:	4b03      	ldr	r3, [pc, #12]	@ (200012ac <I2C_Init+0x40>)
-2000129e:	2201      	movs	r2, #1
-200012a0:	601a      	str	r2, [r3, #0]
+    I2C->I2C_CR1 = 0; // I2C_CR1, clear
+2000126c:	4b0e      	ldr	r3, [pc, #56]	@ (200012a8 <I2C_Init+0x40>)
+2000126e:	2200      	movs	r2, #0
+20001270:	601a      	str	r2, [r3, #0]
+    I2C->I2C_TIMINGR = 0x20303e5d; // I2C timing configuration
+20001272:	4b0d      	ldr	r3, [pc, #52]	@ (200012a8 <I2C_Init+0x40>)
+20001274:	4a0d      	ldr	r2, [pc, #52]	@ (200012ac <I2C_Init+0x44>)
+20001276:	611a      	str	r2, [r3, #16]
+    I2C->I2C_OAR1 = 0; // I2C OAR1 configuration
+20001278:	4b0b      	ldr	r3, [pc, #44]	@ (200012a8 <I2C_Init+0x40>)
+2000127a:	2200      	movs	r2, #0
+2000127c:	609a      	str	r2, [r3, #8]
+    I2C->I2C_OAR1 = 0x8000; // Ack own address1 mode
+2000127e:	4b0a      	ldr	r3, [pc, #40]	@ (200012a8 <I2C_Init+0x40>)
+20001280:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+20001284:	609a      	str	r2, [r3, #8]
+    I2C->I2C_CR2 = 0; // I2C CR2 configuration
+20001286:	4b08      	ldr	r3, [pc, #32]	@ (200012a8 <I2C_Init+0x40>)
+20001288:	2200      	movs	r2, #0
+2000128a:	605a      	str	r2, [r3, #4]
+    USART -> USART_CR2 = 0x2008000; // Auto end, bit 15, NACK
+2000128c:	4b08      	ldr	r3, [pc, #32]	@ (200012b0 <I2C_Init+0x48>)
+2000128e:	4a09      	ldr	r2, [pc, #36]	@ (200012b4 <I2C_Init+0x4c>)
+20001290:	605a      	str	r2, [r3, #4]
+    I2C->I2C_OAR2 = 0; // I2C OAR2 configuration
+20001292:	4b05      	ldr	r3, [pc, #20]	@ (200012a8 <I2C_Init+0x40>)
+20001294:	2200      	movs	r2, #0
+20001296:	60da      	str	r2, [r3, #12]
+    I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
+20001298:	4b03      	ldr	r3, [pc, #12]	@ (200012a8 <I2C_Init+0x40>)
+2000129a:	2201      	movs	r2, #1
+2000129c:	601a      	str	r2, [r3, #0]
 }
-200012a2:	bf00      	nop
-200012a4:	46bd      	mov	sp, r7
-200012a6:	f85d 7b04 	ldr.w	r7, [sp], #4
-200012aa:	4770      	bx	lr
-200012ac:	40005400 	.word	0x40005400
-200012b0:	40005410 	.word	0x40005410
-200012b4:	20303e5d 	.word	0x20303e5d
-200012b8:	40005408 	.word	0x40005408
-200012bc:	40005404 	.word	0x40005404
-200012c0:	40004404 	.word	0x40004404
-200012c4:	02008000 	.word	0x02008000
-200012c8:	4000540c 	.word	0x4000540c
+2000129e:	bf00      	nop
+200012a0:	46bd      	mov	sp, r7
+200012a2:	f85d 7b04 	ldr.w	r7, [sp], #4
+200012a6:	4770      	bx	lr
+200012a8:	40005400 	.word	0x40005400
+200012ac:	20303e5d 	.word	0x20303e5d
+200012b0:	40004400 	.word	0x40004400
+200012b4:	02008000 	.word	0x02008000
 
-200012cc <I2C_Init_INIT>:
+200012b8 <I2C_Init_INIT>:
 
 
 void I2C_Init_INIT(void) {
-200012cc:	b480      	push	{r7}
-200012ce:	af00      	add	r7, sp, #0
+200012b8:	b480      	push	{r7}
+200012ba:	af00      	add	r7, sp, #0
     // Initialization and clock configuration
-    *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
-200012d0:	4b2f      	ldr	r3, [pc, #188]	@ (20001390 <I2C_Init_INIT+0xc4>)
-200012d2:	f244 0201 	movw	r2, #16385	@ 0x4001
-200012d6:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
-200012d8:	4b2e      	ldr	r3, [pc, #184]	@ (20001394 <I2C_Init_INIT+0xc8>)
-200012da:	f04f 5280 	mov.w	r2, #268435456	@ 0x10000000
-200012de:	601a      	str	r2, [r3, #0]
-  //  *(volatile uint32_t *)(0x40021088) = 0; // RCC I2C clock selection
-    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
-200012e0:	4b2d      	ldr	r3, [pc, #180]	@ (20001398 <I2C_Init_INIT+0xcc>)
-200012e2:	f44f 7200 	mov.w	r2, #512	@ 0x200
-200012e6:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
-200012e8:	4b2c      	ldr	r3, [pc, #176]	@ (2000139c <I2C_Init_INIT+0xd0>)
-200012ea:	f242 02ff 	movw	r2, #8447	@ 0x20ff
-200012ee:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40021058) = 0x32200000;
-200012f0:	4b28      	ldr	r3, [pc, #160]	@ (20001394 <I2C_Init_INIT+0xc8>)
-200012f2:	4a2b      	ldr	r2, [pc, #172]	@ (200013a0 <I2C_Init_INIT+0xd4>)
-200012f4:	601a      	str	r2, [r3, #0]
-
+    RCC->APB2ENR = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
+200012bc:	4b2f      	ldr	r3, [pc, #188]	@ (2000137c <I2C_Init_INIT+0xc4>)
+200012be:	f244 0201 	movw	r2, #16385	@ 0x4001
+200012c2:	661a      	str	r2, [r3, #96]	@ 0x60
+    RCC->APB1ENR1 = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
+200012c4:	4b2d      	ldr	r3, [pc, #180]	@ (2000137c <I2C_Init_INIT+0xc4>)
+200012c6:	f04f 5280 	mov.w	r2, #268435456	@ 0x10000000
+200012ca:	659a      	str	r2, [r3, #88]	@ 0x58
+    // RCC->CCIPR = 0; // RCC I2C clock selection (commented out as it was in the original code)
+    PWR->PWR_CR2 = 0x200; // PWR_CR2 enable
+200012cc:	4b2c      	ldr	r3, [pc, #176]	@ (20001380 <I2C_Init_INIT+0xc8>)
+200012ce:	f44f 7200 	mov.w	r2, #512	@ 0x200
+200012d2:	605a      	str	r2, [r3, #4]
+    RCC->AHB2ENR = 0x20ff; // GPIOG_CLK_ENABLE
+200012d4:	4b29      	ldr	r3, [pc, #164]	@ (2000137c <I2C_Init_INIT+0xc4>)
+200012d6:	f242 02ff 	movw	r2, #8447	@ 0x20ff
+200012da:	64da      	str	r2, [r3, #76]	@ 0x4c
+    RCC->APB1ENR1 = 0x32200000;
+200012dc:	4b27      	ldr	r3, [pc, #156]	@ (2000137c <I2C_Init_INIT+0xc4>)
+200012de:	4a29      	ldr	r2, [pc, #164]	@ (20001384 <I2C_Init_INIT+0xcc>)
+200012e0:	659a      	str	r2, [r3, #88]	@ 0x58
 
     // GPIO configuration
-    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
-200012f6:	4b2b      	ldr	r3, [pc, #172]	@ (200013a4 <I2C_Init_INIT+0xd8>)
-200012f8:	4a2b      	ldr	r2, [pc, #172]	@ (200013a8 <I2C_Init_INIT+0xdc>)
-200012fa:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
-200012fc:	4b2b      	ldr	r3, [pc, #172]	@ (200013ac <I2C_Init_INIT+0xe0>)
-200012fe:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
+    GPIOG->GPIOx_OSPEEDR = 0xc3c0fff; // GPIOx_OSPEEDR
+200012e2:	4b29      	ldr	r3, [pc, #164]	@ (20001388 <I2C_Init_INIT+0xd0>)
+200012e4:	4a29      	ldr	r2, [pc, #164]	@ (2000138c <I2C_Init_INIT+0xd4>)
+200012e6:	609a      	str	r2, [r3, #8]
+    GPIOG->GPIOx_OTYPER = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
+200012e8:	4b27      	ldr	r3, [pc, #156]	@ (20001388 <I2C_Init_INIT+0xd0>)
+200012ea:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
+200012ee:	605a      	str	r2, [r3, #4]
+    GPIOG->GPIOx_PUPDR = 0x4000000; // GPIOG_PUPDR
+200012f0:	4b25      	ldr	r3, [pc, #148]	@ (20001388 <I2C_Init_INIT+0xd0>)
+200012f2:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
+200012f6:	60da      	str	r2, [r3, #12]
+    GPIOG->GPIOx_AFRL = 0x400cc0; // Configure Alternate function mapped with the current IO
+200012f8:	4b23      	ldr	r3, [pc, #140]	@ (20001388 <I2C_Init_INIT+0xd0>)
+200012fa:	4a25      	ldr	r2, [pc, #148]	@ (20001390 <I2C_Init_INIT+0xd8>)
+200012fc:	621a      	str	r2, [r3, #32]
+    GPIOG->GPIOx_MODER = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+200012fe:	4b22      	ldr	r3, [pc, #136]	@ (20001388 <I2C_Init_INIT+0xd0>)
+20001300:	4a24      	ldr	r2, [pc, #144]	@ (20001394 <I2C_Init_INIT+0xdc>)
 20001302:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
-20001304:	4b2a      	ldr	r3, [pc, #168]	@ (200013b0 <I2C_Init_INIT+0xe4>)
-20001306:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
-2000130a:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
-2000130c:	4b29      	ldr	r3, [pc, #164]	@ (200013b4 <I2C_Init_INIT+0xe8>)
-2000130e:	4a2a      	ldr	r2, [pc, #168]	@ (200013b8 <I2C_Init_INIT+0xec>)
-20001310:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-20001312:	4b2a      	ldr	r3, [pc, #168]	@ (200013bc <I2C_Init_INIT+0xf0>)
-20001314:	4a2a      	ldr	r2, [pc, #168]	@ (200013c0 <I2C_Init_INIT+0xf4>)
-20001316:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
-20001318:	4b22      	ldr	r3, [pc, #136]	@ (200013a4 <I2C_Init_INIT+0xd8>)
-2000131a:	4a2a      	ldr	r2, [pc, #168]	@ (200013c4 <I2C_Init_INIT+0xf8>)
-2000131c:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-2000131e:	4b23      	ldr	r3, [pc, #140]	@ (200013ac <I2C_Init_INIT+0xe0>)
-20001320:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
-20001324:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
-20001326:	4b28      	ldr	r3, [pc, #160]	@ (200013c8 <I2C_Init_INIT+0xfc>)
-20001328:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
-2000132c:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
-2000132e:	4b21      	ldr	r3, [pc, #132]	@ (200013b4 <I2C_Init_INIT+0xe8>)
-20001330:	4a26      	ldr	r2, [pc, #152]	@ (200013cc <I2C_Init_INIT+0x100>)
-20001332:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-20001334:	4b21      	ldr	r3, [pc, #132]	@ (200013bc <I2C_Init_INIT+0xf0>)
-20001336:	4a26      	ldr	r2, [pc, #152]	@ (200013d0 <I2C_Init_INIT+0x104>)
-20001338:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
-2000133a:	4b1a      	ldr	r3, [pc, #104]	@ (200013a4 <I2C_Init_INIT+0xd8>)
-2000133c:	4a21      	ldr	r2, [pc, #132]	@ (200013c4 <I2C_Init_INIT+0xf8>)
-2000133e:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-20001340:	4b1a      	ldr	r3, [pc, #104]	@ (200013ac <I2C_Init_INIT+0xe0>)
-20001342:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
-20001346:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800082C) = 0x0; // Activate pull up or pull down GPIO_PUPDR
-20001348:	4b1f      	ldr	r3, [pc, #124]	@ (200013c8 <I2C_Init_INIT+0xfc>)
-2000134a:	2200      	movs	r2, #0
-2000134c:	601a      	str	r2, [r3, #0]
-    *(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY
-2000134e:	4b21      	ldr	r3, [pc, #132]	@ (200013d4 <I2C_Init_INIT+0x108>)
-20001350:	2224      	movs	r2, #36	@ 0x24
-20001352:	701a      	strb	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005400) = 0; // Disable the selected I2C peripheral
-20001354:	4b20      	ldr	r3, [pc, #128]	@ (200013d8 <I2C_Init_INIT+0x10c>)
-20001356:	2200      	movs	r2, #0
-20001358:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005410) = 0x20303E5D; // Configure I2Cx: Frequency range
-2000135a:	4b20      	ldr	r3, [pc, #128]	@ (200013dc <I2C_Init_INIT+0x110>)
-2000135c:	4a20      	ldr	r2, [pc, #128]	@ (200013e0 <I2C_Init_INIT+0x114>)
-2000135e:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005408) = 0; // I2Cx OAR1 Configuration
-20001360:	4b20      	ldr	r3, [pc, #128]	@ (200013e4 <I2C_Init_INIT+0x118>)
-20001362:	2200      	movs	r2, #0
-20001364:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
-20001366:	4b1f      	ldr	r3, [pc, #124]	@ (200013e4 <I2C_Init_INIT+0x118>)
-20001368:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
-2000136c:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005404) = 0; // Clear the I2C ADD10 bit
-2000136e:	4b1e      	ldr	r3, [pc, #120]	@ (200013e8 <I2C_Init_INIT+0x11c>)
-20001370:	2200      	movs	r2, #0
-20001372:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4000540C) = 0; // I2Cx OAR2 Configuration
-20001374:	4b1d      	ldr	r3, [pc, #116]	@ (200013ec <I2C_Init_INIT+0x120>)
-20001376:	2200      	movs	r2, #0
-20001378:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005400) = 0; // Configure I2Cx: Generalcall and NoStretch mode
-2000137a:	4b17      	ldr	r3, [pc, #92]	@ (200013d8 <I2C_Init_INIT+0x10c>)
-2000137c:	2200      	movs	r2, #0
-2000137e:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
-20001380:	4b15      	ldr	r3, [pc, #84]	@ (200013d8 <I2C_Init_INIT+0x10c>)
-20001382:	2201      	movs	r2, #1
-20001384:	601a      	str	r2, [r3, #0]
+    GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff; // Configure the IO Speed
+20001304:	4b20      	ldr	r3, [pc, #128]	@ (20001388 <I2C_Init_INIT+0xd0>)
+20001306:	4a24      	ldr	r2, [pc, #144]	@ (20001398 <I2C_Init_INIT+0xe0>)
+20001308:	609a      	str	r2, [r3, #8]
+    GPIOG->GPIOx_OTYPER = 0x6000; // GPIO_OTYPER
+2000130a:	4b1f      	ldr	r3, [pc, #124]	@ (20001388 <I2C_Init_INIT+0xd0>)
+2000130c:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
+20001310:	605a      	str	r2, [r3, #4]
+    GPIOA->GPIOx_PUPDR = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+20001312:	f04f 4390 	mov.w	r3, #1207959552	@ 0x48000000
+20001316:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
+2000131a:	60da      	str	r2, [r3, #12]
+    GPIOG->GPIOx_AFRL = 0x4400cc0; // Configure Alternate function mapped with the current IO
+2000131c:	4b1a      	ldr	r3, [pc, #104]	@ (20001388 <I2C_Init_INIT+0xd0>)
+2000131e:	4a1f      	ldr	r2, [pc, #124]	@ (2000139c <I2C_Init_INIT+0xe4>)
+20001320:	621a      	str	r2, [r3, #32]
+    GPIOG->GPIOx_MODER = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+20001322:	4b19      	ldr	r3, [pc, #100]	@ (20001388 <I2C_Init_INIT+0xd0>)
+20001324:	4a1e      	ldr	r2, [pc, #120]	@ (200013a0 <I2C_Init_INIT+0xe8>)
+20001326:	601a      	str	r2, [r3, #0]
+    GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff; // Configure the IO Speed
+20001328:	4b17      	ldr	r3, [pc, #92]	@ (20001388 <I2C_Init_INIT+0xd0>)
+2000132a:	4a1b      	ldr	r2, [pc, #108]	@ (20001398 <I2C_Init_INIT+0xe0>)
+2000132c:	609a      	str	r2, [r3, #8]
+    GPIOG->GPIOx_OTYPER = 0x6000; // GPIO_OTYPER
+2000132e:	4b16      	ldr	r3, [pc, #88]	@ (20001388 <I2C_Init_INIT+0xd0>)
+20001330:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
+20001334:	605a      	str	r2, [r3, #4]
+    GPIOA->GPIOx_PUPDR = 0x0; // Activate pull up or pull down GPIO_PUPDR
+20001336:	f04f 4390 	mov.w	r3, #1207959552	@ 0x48000000
+2000133a:	2200      	movs	r2, #0
+2000133c:	60da      	str	r2, [r3, #12]
+    //*(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY (specific address not covered by provided structures)
 
+    I2C->I2C_CR1 = 0; // Disable the selected I2C peripheral
+2000133e:	4b19      	ldr	r3, [pc, #100]	@ (200013a4 <I2C_Init_INIT+0xec>)
+20001340:	2200      	movs	r2, #0
+20001342:	601a      	str	r2, [r3, #0]
+    I2C->I2C_TIMINGR = 0x20303E5D; // Configure I2Cx: Frequency range
+20001344:	4b17      	ldr	r3, [pc, #92]	@ (200013a4 <I2C_Init_INIT+0xec>)
+20001346:	4a18      	ldr	r2, [pc, #96]	@ (200013a8 <I2C_Init_INIT+0xf0>)
+20001348:	611a      	str	r2, [r3, #16]
+    I2C->I2C_OAR1 = 0; // I2Cx OAR1 Configuration
+2000134a:	4b16      	ldr	r3, [pc, #88]	@ (200013a4 <I2C_Init_INIT+0xec>)
+2000134c:	2200      	movs	r2, #0
+2000134e:	609a      	str	r2, [r3, #8]
+    I2C->I2C_OAR1 = 0x8000; // Ack own address1 mode
+20001350:	4b14      	ldr	r3, [pc, #80]	@ (200013a4 <I2C_Init_INIT+0xec>)
+20001352:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+20001356:	609a      	str	r2, [r3, #8]
+    I2C->I2C_CR2 = 0; // Clear the I2C ADD10 bit
+20001358:	4b12      	ldr	r3, [pc, #72]	@ (200013a4 <I2C_Init_INIT+0xec>)
+2000135a:	2200      	movs	r2, #0
+2000135c:	605a      	str	r2, [r3, #4]
+    I2C->I2C_OAR2 = 0; // I2Cx OAR2 Configuration
+2000135e:	4b11      	ldr	r3, [pc, #68]	@ (200013a4 <I2C_Init_INIT+0xec>)
+20001360:	2200      	movs	r2, #0
+20001362:	60da      	str	r2, [r3, #12]
+    I2C->I2C_CR1 = 0; // Configure I2Cx: Generalcall and NoStretch mode
+20001364:	4b0f      	ldr	r3, [pc, #60]	@ (200013a4 <I2C_Init_INIT+0xec>)
+20001366:	2200      	movs	r2, #0
+20001368:	601a      	str	r2, [r3, #0]
+    I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
+2000136a:	4b0e      	ldr	r3, [pc, #56]	@ (200013a4 <I2C_Init_INIT+0xec>)
+2000136c:	2201      	movs	r2, #1
+2000136e:	601a      	str	r2, [r3, #0]
 }
-20001386:	bf00      	nop
-20001388:	46bd      	mov	sp, r7
-2000138a:	f85d 7b04 	ldr.w	r7, [sp], #4
-2000138e:	4770      	bx	lr
-20001390:	40021060 	.word	0x40021060
-20001394:	40021058 	.word	0x40021058
-20001398:	40007004 	.word	0x40007004
-2000139c:	4002104c 	.word	0x4002104c
-200013a0:	32200000 	.word	0x32200000
-200013a4:	48001808 	.word	0x48001808
-200013a8:	0c3c0fff 	.word	0x0c3c0fff
-200013ac:	48001804 	.word	0x48001804
-200013b0:	4800180c 	.word	0x4800180c
-200013b4:	48001824 	.word	0x48001824
-200013b8:	00400cc0 	.word	0x00400cc0
-200013bc:	48001800 	.word	0x48001800
-200013c0:	3bebcaaa 	.word	0x3bebcaaa
-200013c4:	3c3c0fff 	.word	0x3c3c0fff
-200013c8:	4800082c 	.word	0x4800082c
-200013cc:	04400cc0 	.word	0x04400cc0
-200013d0:	2bebcaaa 	.word	0x2bebcaaa
-200013d4:	48001841 	.word	0x48001841
-200013d8:	40005400 	.word	0x40005400
-200013dc:	40005410 	.word	0x40005410
-200013e0:	20303e5d 	.word	0x20303e5d
-200013e4:	40005408 	.word	0x40005408
-200013e8:	40005404 	.word	0x40005404
-200013ec:	4000540c 	.word	0x4000540c
+20001370:	bf00      	nop
+20001372:	46bd      	mov	sp, r7
+20001374:	f85d 7b04 	ldr.w	r7, [sp], #4
+20001378:	4770      	bx	lr
+2000137a:	bf00      	nop
+2000137c:	40021000 	.word	0x40021000
+20001380:	40007000 	.word	0x40007000
+20001384:	32200000 	.word	0x32200000
+20001388:	48001800 	.word	0x48001800
+2000138c:	0c3c0fff 	.word	0x0c3c0fff
+20001390:	00400cc0 	.word	0x00400cc0
+20001394:	3bebcaaa 	.word	0x3bebcaaa
+20001398:	3c3c0fff 	.word	0x3c3c0fff
+2000139c:	04400cc0 	.word	0x04400cc0
+200013a0:	2bebcaaa 	.word	0x2bebcaaa
+200013a4:	40005400 	.word	0x40005400
+200013a8:	20303e5d 	.word	0x20303e5d
 
-200013f0 <ui_cmd_I2C>:
-
+200013ac <ui_cmd_I2C>:
 
 
 void ui_cmd_I2C(int argc, char *argv[])
 {
-200013f0:	b580      	push	{r7, lr}
-200013f2:	b086      	sub	sp, #24
-200013f4:	af00      	add	r7, sp, #0
-200013f6:	6078      	str	r0, [r7, #4]
-200013f8:	6039      	str	r1, [r7, #0]
-
+200013ac:	b580      	push	{r7, lr}
+200013ae:	b086      	sub	sp, #24
+200013b0:	af00      	add	r7, sp, #0
+200013b2:	6078      	str	r0, [r7, #4]
+200013b4:	6039      	str	r1, [r7, #0]
+    // RCC->APB2ENR = 0x4001;
     *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
-200013fa:	4b59      	ldr	r3, [pc, #356]	@ (20001560 <ui_cmd_I2C+0x170>)
-200013fc:	f244 0201 	movw	r2, #16385	@ 0x4001
-20001400:	601a      	str	r2, [r3, #0]
+200013b6:	4b59      	ldr	r3, [pc, #356]	@ (2000151c <ui_cmd_I2C+0x170>)
+200013b8:	f244 0201 	movw	r2, #16385	@ 0x4001
+200013bc:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint32_t *)(0x40021058) = 0x10000000;//__HAL_RCC_PWR_CLK_ENABLE();
-20001402:	4b58      	ldr	r3, [pc, #352]	@ (20001564 <ui_cmd_I2C+0x174>)
-20001404:	f04f 5280 	mov.w	r2, #268435456	@ 0x10000000
+    // RCC->APB1ENR1 = 0x10000000;
+    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
+200013be:	4b58      	ldr	r3, [pc, #352]	@ (20001520 <ui_cmd_I2C+0x174>)
+200013c0:	f04f 5280 	mov.w	r2, #268435456	@ 0x10000000
+200013c4:	601a      	str	r2, [r3, #0]
+
+    // RCC->CCIPR = 0;
+    *(volatile uint32_t *)(0x40021088) = 0; // RCC i2c clock selection
+200013c6:	4b57      	ldr	r3, [pc, #348]	@ (20001524 <ui_cmd_I2C+0x178>)
+200013c8:	2200      	movs	r2, #0
+200013ca:	601a      	str	r2, [r3, #0]
+
+    // PWR->PWR_CR2 = 0x200;
+    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
+200013cc:	4b56      	ldr	r3, [pc, #344]	@ (20001528 <ui_cmd_I2C+0x17c>)
+200013ce:	f44f 7200 	mov.w	r2, #512	@ 0x200
+200013d2:	601a      	str	r2, [r3, #0]
+
+    // RCC->AHB2ENR = 0x20ff;
+    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
+200013d4:	4b55      	ldr	r3, [pc, #340]	@ (2000152c <ui_cmd_I2C+0x180>)
+200013d6:	f242 02ff 	movw	r2, #8447	@ 0x20ff
+200013da:	601a      	str	r2, [r3, #0]
+
+    // RCC->APB1ENR1 = 0x32200000;
+    *(volatile uint32_t *)(0x40021058) = 0x32200000;
+200013dc:	4b50      	ldr	r3, [pc, #320]	@ (20001520 <ui_cmd_I2C+0x174>)
+200013de:	4a54      	ldr	r2, [pc, #336]	@ (20001530 <ui_cmd_I2C+0x184>)
+200013e0:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_OSPEEDR = 0xc3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
+200013e2:	4b54      	ldr	r3, [pc, #336]	@ (20001534 <ui_cmd_I2C+0x188>)
+200013e4:	4a54      	ldr	r2, [pc, #336]	@ (20001538 <ui_cmd_I2C+0x18c>)
+200013e6:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_OTYPER = 0x2000;
+    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
+200013e8:	4b54      	ldr	r3, [pc, #336]	@ (2000153c <ui_cmd_I2C+0x190>)
+200013ea:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
+200013ee:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_PUPDR = 0x4000000;
+    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
+200013f0:	4b53      	ldr	r3, [pc, #332]	@ (20001540 <ui_cmd_I2C+0x194>)
+200013f2:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
+200013f6:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_AFRL = 0x400cc0;
+    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
+200013f8:	4b52      	ldr	r3, [pc, #328]	@ (20001544 <ui_cmd_I2C+0x198>)
+200013fa:	4a53      	ldr	r2, [pc, #332]	@ (20001548 <ui_cmd_I2C+0x19c>)
+200013fc:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_MODER = 0x3bebcaaa;
+    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+200013fe:	4b53      	ldr	r3, [pc, #332]	@ (2000154c <ui_cmd_I2C+0x1a0>)
+20001400:	4a53      	ldr	r2, [pc, #332]	@ (20001550 <ui_cmd_I2C+0x1a4>)
+20001402:	601a      	str	r2, [r3, #0]
+
+    // GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+20001404:	4b4b      	ldr	r3, [pc, #300]	@ (20001534 <ui_cmd_I2C+0x188>)
+20001406:	4a53      	ldr	r2, [pc, #332]	@ (20001554 <ui_cmd_I2C+0x1a8>)
 20001408:	601a      	str	r2, [r3, #0]
 
+    // GPIOG->GPIOx_OTYPER = 0x6000;
+    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
+2000140a:	4b4c      	ldr	r3, [pc, #304]	@ (2000153c <ui_cmd_I2C+0x190>)
+2000140c:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
+20001410:	601a      	str	r2, [r3, #0]
 
-	*(volatile uint32_t *)(0x40021088) = 0; //RCC i2c clock selection
-2000140a:	4b57      	ldr	r3, [pc, #348]	@ (20001568 <ui_cmd_I2C+0x178>)
-2000140c:	2200      	movs	r2, #0
-2000140e:	601a      	str	r2, [r3, #0]
+    // GPIOA->GPIOx_PUPDR = 0x4000000;
+    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+20001412:	4b51      	ldr	r3, [pc, #324]	@ (20001558 <ui_cmd_I2C+0x1ac>)
+20001414:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
+20001418:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint32_t *)(0x40007004) = 0x200;   // PWR_CR2 enable
-20001410:	4b56      	ldr	r3, [pc, #344]	@ (2000156c <ui_cmd_I2C+0x17c>)
-20001412:	f44f 7200 	mov.w	r2, #512	@ 0x200
-20001416:	601a      	str	r2, [r3, #0]
-
-    *(volatile uint32_t *)(0x4002104C) = 0x20ff;    // GPIOG_CLK_ENABLE
-20001418:	4b55      	ldr	r3, [pc, #340]	@ (20001570 <ui_cmd_I2C+0x180>)
-2000141a:	f242 02ff 	movw	r2, #8447	@ 0x20ff
+    // GPIOG->GPIOx_AFRL = 0x4400cc0;
+    *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
+2000141a:	4b4a      	ldr	r3, [pc, #296]	@ (20001544 <ui_cmd_I2C+0x198>)
+2000141c:	4a4f      	ldr	r2, [pc, #316]	@ (2000155c <ui_cmd_I2C+0x1b0>)
 2000141e:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint32_t *)(0x40021058) = 0x32200000;
-20001420:	4b50      	ldr	r3, [pc, #320]	@ (20001564 <ui_cmd_I2C+0x174>)
-20001422:	4a54      	ldr	r2, [pc, #336]	@ (20001574 <ui_cmd_I2C+0x184>)
+    // GPIOG->GPIOx_MODER = 0x2bebcaaa;
+    *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+20001420:	4b4a      	ldr	r3, [pc, #296]	@ (2000154c <ui_cmd_I2C+0x1a0>)
+20001422:	4a4f      	ldr	r2, [pc, #316]	@ (20001560 <ui_cmd_I2C+0x1b4>)
 20001424:	601a      	str	r2, [r3, #0]
 
-
-    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; //GPIOx_OSPEEDR
-20001426:	4b54      	ldr	r3, [pc, #336]	@ (20001578 <ui_cmd_I2C+0x188>)
-20001428:	4a54      	ldr	r2, [pc, #336]	@ (2000157c <ui_cmd_I2C+0x18c>)
+    // GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+20001426:	4b43      	ldr	r3, [pc, #268]	@ (20001534 <ui_cmd_I2C+0x188>)
+20001428:	4a4a      	ldr	r2, [pc, #296]	@ (20001554 <ui_cmd_I2C+0x1a8>)
 2000142a:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x2000; //GPIO port output type register (GPIOx_OTYPER)
-2000142c:	4b54      	ldr	r3, [pc, #336]	@ (20001580 <ui_cmd_I2C+0x190>)
-2000142e:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
+
+    // GPIOG->GPIOx_OTYPER = 0x6000;
+    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
+2000142c:	4b43      	ldr	r3, [pc, #268]	@ (2000153c <ui_cmd_I2C+0x190>)
+2000142e:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
 20001432:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800180C) = 0x4000000; //GPIOG_PUPDR
-20001434:	4b53      	ldr	r3, [pc, #332]	@ (20001584 <ui_cmd_I2C+0x194>)
-20001436:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
-2000143a:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint32_t *)(0x48001824) = 0x400cc0;// Configure Alternate function mapped with the current IO
-2000143c:	4b52      	ldr	r3, [pc, #328]	@ (20001588 <ui_cmd_I2C+0x198>)
-2000143e:	4a53      	ldr	r2, [pc, #332]	@ (2000158c <ui_cmd_I2C+0x19c>)
-20001440:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-20001442:	4b53      	ldr	r3, [pc, #332]	@ (20001590 <ui_cmd_I2C+0x1a0>)
-20001444:	4a53      	ldr	r2, [pc, #332]	@ (20001594 <ui_cmd_I2C+0x1a4>)
-20001446:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff;  // Configure the IO Speed */
-20001448:	4b4b      	ldr	r3, [pc, #300]	@ (20001578 <ui_cmd_I2C+0x188>)
-2000144a:	4a53      	ldr	r2, [pc, #332]	@ (20001598 <ui_cmd_I2C+0x1a8>)
-2000144c:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-2000144e:	4b4c      	ldr	r3, [pc, #304]	@ (20001580 <ui_cmd_I2C+0x190>)
-20001450:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
-20001454:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // activate pull up or pull down GPIO_PUPDR
-20001456:	4b51      	ldr	r3, [pc, #324]	@ (2000159c <ui_cmd_I2C+0x1ac>)
-20001458:	f04f 6280 	mov.w	r2, #67108864	@ 0x4000000
-2000145c:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001824) = 0x4400cc0;// Configure Alternate function mapped with the current IO
-2000145e:	4b4a      	ldr	r3, [pc, #296]	@ (20001588 <ui_cmd_I2C+0x198>)
-20001460:	4a4f      	ldr	r2, [pc, #316]	@ (200015a0 <ui_cmd_I2C+0x1b0>)
-20001462:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-20001464:	4b4a      	ldr	r3, [pc, #296]	@ (20001590 <ui_cmd_I2C+0x1a0>)
-20001466:	4a4f      	ldr	r2, [pc, #316]	@ (200015a4 <ui_cmd_I2C+0x1b4>)
-20001468:	601a      	str	r2, [r3, #0]
+    // GPIOA->GPIOx_PUPDR = 0x0;
+    *(volatile uint32_t *)(0x4800082C) = 0x0; // Activate pull up or pull down GPIO_PUPDR
+20001434:	4b48      	ldr	r3, [pc, #288]	@ (20001558 <ui_cmd_I2C+0x1ac>)
+20001436:	2200      	movs	r2, #0
+20001438:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff;  /* Configure the IO Speed */
-2000146a:	4b43      	ldr	r3, [pc, #268]	@ (20001578 <ui_cmd_I2C+0x188>)
-2000146c:	4a4a      	ldr	r2, [pc, #296]	@ (20001598 <ui_cmd_I2C+0x1a8>)
-2000146e:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-20001470:	4b43      	ldr	r3, [pc, #268]	@ (20001580 <ui_cmd_I2C+0x190>)
-20001472:	f44f 42c0 	mov.w	r2, #24576	@ 0x6000
+    // *(volatile uint8_t *)(0x48001841) = 0x24; (specific address not covered by provided structures)
+    *(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY;
+2000143a:	4b4a      	ldr	r3, [pc, #296]	@ (20001564 <ui_cmd_I2C+0x1b8>)
+2000143c:	2224      	movs	r2, #36	@ 0x24
+2000143e:	701a      	strb	r2, [r3, #0]
+
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // Disable the selected I2C peripheral
+20001440:	4b49      	ldr	r3, [pc, #292]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+20001442:	2200      	movs	r2, #0
+20001444:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_TIMINGR = 0x20303E5D;
+    *(volatile uint32_t *)(0x40005410) = 0x20303E5D; // Configure I2Cx: Frequency range
+20001446:	4b49      	ldr	r3, [pc, #292]	@ (2000156c <ui_cmd_I2C+0x1c0>)
+20001448:	4a49      	ldr	r2, [pc, #292]	@ (20001570 <ui_cmd_I2C+0x1c4>)
+2000144a:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_OAR1 = 0;
+    *(volatile uint32_t *)(0x40005408) = 0; // I2Cx OAR1 Configuration
+2000144c:	4b49      	ldr	r3, [pc, #292]	@ (20001574 <ui_cmd_I2C+0x1c8>)
+2000144e:	2200      	movs	r2, #0
+20001450:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_OAR1 = 0x8000;
+    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
+20001452:	4b48      	ldr	r3, [pc, #288]	@ (20001574 <ui_cmd_I2C+0x1c8>)
+20001454:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+20001458:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_CR2 = 0;
+    *(volatile uint32_t *)(0x40005404) = 0; // Clear the I2C ADD10 bit
+2000145a:	4b47      	ldr	r3, [pc, #284]	@ (20001578 <ui_cmd_I2C+0x1cc>)
+2000145c:	2200      	movs	r2, #0
+2000145e:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_OAR2 = 0;
+    *(volatile uint32_t *)(0x4000540C) = 0; // I2Cx OAR2 Configuration
+20001460:	4b46      	ldr	r3, [pc, #280]	@ (2000157c <ui_cmd_I2C+0x1d0>)
+20001462:	2200      	movs	r2, #0
+20001464:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // Configure I2Cx: Generalcall and NoStretch mode
+20001466:	4b40      	ldr	r3, [pc, #256]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+20001468:	2200      	movs	r2, #0
+2000146a:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_CR1 = 1;
+    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
+2000146c:	4b3e      	ldr	r3, [pc, #248]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+2000146e:	2201      	movs	r2, #1
+20001470:	601a      	str	r2, [r3, #0]
+
+    // Transmit
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // I2C_CR1, clear
+20001472:	4b3d      	ldr	r3, [pc, #244]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+20001474:	2200      	movs	r2, #0
 20001476:	601a      	str	r2, [r3, #0]
-    *(volatile uint32_t *)(0x4800082C) = 0x0; /* activate pull up or pull down GPIO_PUPDR */
-20001478:	4b48      	ldr	r3, [pc, #288]	@ (2000159c <ui_cmd_I2C+0x1ac>)
-2000147a:	2200      	movs	r2, #0
+
+    // I2C->I2C_TIMINGR = 0x20303e5d;
+    *(volatile uint32_t *)(0x40005410) = 0x20303e5d; // 595, timing
+20001478:	4b3c      	ldr	r3, [pc, #240]	@ (2000156c <ui_cmd_I2C+0x1c0>)
+2000147a:	4a3d      	ldr	r2, [pc, #244]	@ (20001570 <ui_cmd_I2C+0x1c4>)
 2000147c:	601a      	str	r2, [r3, #0]
 
-    *(volatile uint8_t *)(0x48001841) = 0x24; //hi2c->State = HAL_I2C_STATE_BUSY;
-2000147e:	4b4a      	ldr	r3, [pc, #296]	@ (200015a8 <ui_cmd_I2C+0x1b8>)
-20001480:	2224      	movs	r2, #36	@ 0x24
-20001482:	701a      	strb	r2, [r3, #0]
+    // I2C->I2C_OAR1 = 0;
+    *(volatile uint32_t *)(0x40005408) = 0; // 595, OAR1
+2000147e:	4b3d      	ldr	r3, [pc, #244]	@ (20001574 <ui_cmd_I2C+0x1c8>)
+20001480:	2200      	movs	r2, #0
+20001482:	601a      	str	r2, [r3, #0]
 
+    // I2C->I2C_OAR1 = 0x8000;
+    *(volatile uint32_t *)(0x40005408) = 0x8000;
+20001484:	4b3b      	ldr	r3, [pc, #236]	@ (20001574 <ui_cmd_I2C+0x1c8>)
+20001486:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+2000148a:	601a      	str	r2, [r3, #0]
 
+    // I2C->I2C_CR2 = 0;
+    *(volatile uint32_t *)(0x40005404) = 0; // 616, CR2
+2000148c:	4b3a      	ldr	r3, [pc, #232]	@ (20001578 <ui_cmd_I2C+0x1cc>)
+2000148e:	2200      	movs	r2, #0
+20001490:	601a      	str	r2, [r3, #0]
 
-	*(volatile uint32_t *)(0x40005400) = 0; //Disable the selected I2C peripheral
-20001484:	4b49      	ldr	r3, [pc, #292]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-20001486:	2200      	movs	r2, #0
-20001488:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005410) = 0x20303E5D; //Configure I2Cx: Frequency range
-2000148a:	4b49      	ldr	r3, [pc, #292]	@ (200015b0 <ui_cmd_I2C+0x1c0>)
-2000148c:	4a49      	ldr	r2, [pc, #292]	@ (200015b4 <ui_cmd_I2C+0x1c4>)
-2000148e:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005408) = 0; //I2Cx OAR1 Configuration
-20001490:	4b49      	ldr	r3, [pc, #292]	@ (200015b8 <ui_cmd_I2C+0x1c8>)
-20001492:	2200      	movs	r2, #0
-20001494:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005408) = 0x8000; //ack own address1 mode
-20001496:	4b48      	ldr	r3, [pc, #288]	@ (200015b8 <ui_cmd_I2C+0x1c8>)
-20001498:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+    // USART->USART_CR2 = 0x2008000;
+    *(volatile uint32_t *)(0x40004404) = 0x2008000; // 618, auto end, bit 15, NACK
+20001492:	4b3b      	ldr	r3, [pc, #236]	@ (20001580 <ui_cmd_I2C+0x1d4>)
+20001494:	4a3b      	ldr	r2, [pc, #236]	@ (20001584 <ui_cmd_I2C+0x1d8>)
+20001496:	601a      	str	r2, [r3, #0]
+
+    // I2C->I2C_OAR2 = 0;
+    *(volatile uint32_t *)(0x4000540C) = 0; // 623, OAR2
+20001498:	4b38      	ldr	r3, [pc, #224]	@ (2000157c <ui_cmd_I2C+0x1d0>)
+2000149a:	2200      	movs	r2, #0
 2000149c:	601a      	str	r2, [r3, #0]
 
-	*(volatile uint32_t *)(0x40005404) = 0; //Clear the I2C ADD10 bit
-2000149e:	4b47      	ldr	r3, [pc, #284]	@ (200015bc <ui_cmd_I2C+0x1cc>)
-200014a0:	2200      	movs	r2, #0
+    // I2C->I2C_CR1 = 1;
+    *(volatile uint32_t *)(0x40005400) = 1; // 634, peripheral enable bit 0
+2000149e:	4b32      	ldr	r3, [pc, #200]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+200014a0:	2201      	movs	r2, #1
 200014a2:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x4000540C) = 0; //I2Cx OAR2 Configuration
-200014a4:	4b46      	ldr	r3, [pc, #280]	@ (200015c0 <ui_cmd_I2C+0x1d0>)
+
+    // I2C->I2C_TXDR = 0x0;
+    *(volatile uint32_t *)(0x40005428) = 0x0; // 1162, TX reg
+200014a4:	4b38      	ldr	r3, [pc, #224]	@ (20001588 <ui_cmd_I2C+0x1dc>)
 200014a6:	2200      	movs	r2, #0
 200014a8:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005400) = 0; //Configure I2Cx: Generalcall and NoStretch mode
-200014aa:	4b40      	ldr	r3, [pc, #256]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-200014ac:	2200      	movs	r2, #0
+
+    // I2C->I2C_CR2 = 0x2012082;
+    *(volatile uint32_t *)(0x40005404) = 0x2012082; // 7217, 82 device address
+200014aa:	4b33      	ldr	r3, [pc, #204]	@ (20001578 <ui_cmd_I2C+0x1cc>)
+200014ac:	4a37      	ldr	r2, [pc, #220]	@ (2000158c <ui_cmd_I2C+0x1e0>)
 200014ae:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005400) = 1; //Enable the selected I2C peripheral
-200014b0:	4b3e      	ldr	r3, [pc, #248]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-200014b2:	2201      	movs	r2, #1
-200014b4:	601a      	str	r2, [r3, #0]
 
+    // Receive
+    uint32_t temp = 0; // I2C_ISR STOPF: STOP detection flag
+200014b0:	2300      	movs	r3, #0
+200014b2:	617b      	str	r3, [r7, #20]
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
+200014b4:	bf00      	nop
+200014b6:	4b36      	ldr	r3, [pc, #216]	@ (20001590 <ui_cmd_I2C+0x1e4>)
+200014b8:	681b      	ldr	r3, [r3, #0]
+200014ba:	617b      	str	r3, [r7, #20]
+200014bc:	697b      	ldr	r3, [r7, #20]
+200014be:	f003 0320 	and.w	r3, r3, #32
+200014c2:	2b00      	cmp	r3, #0
+200014c4:	d0f7      	beq.n	200014b6 <ui_cmd_I2C+0x10a>
 
+    // I2C->I2C_CR2 = 0x2012482;
+    *(volatile uint32_t *)(0x40005404) = 0x2012482; // 7217 update CR2 register
+200014c6:	4b2c      	ldr	r3, [pc, #176]	@ (20001578 <ui_cmd_I2C+0x1cc>)
+200014c8:	4a32      	ldr	r2, [pc, #200]	@ (20001594 <ui_cmd_I2C+0x1e8>)
+200014ca:	601a      	str	r2, [r3, #0]
 
-// transmit
-	*(volatile uint32_t *)(0x40005400) = 0; //I2C_CR1, clear
-200014b6:	4b3d      	ldr	r3, [pc, #244]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-200014b8:	2200      	movs	r2, #0
-200014ba:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005410) = 0x20303e5d; //595, timing
-200014bc:	4b3c      	ldr	r3, [pc, #240]	@ (200015b0 <ui_cmd_I2C+0x1c0>)
-200014be:	4a3d      	ldr	r2, [pc, #244]	@ (200015b4 <ui_cmd_I2C+0x1c4>)
-200014c0:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005408) = 0; //595, OAR1
-200014c2:	4b3d      	ldr	r3, [pc, #244]	@ (200015b8 <ui_cmd_I2C+0x1c8>)
-200014c4:	2200      	movs	r2, #0
-200014c6:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005408) = 0x8000;
-200014c8:	4b3b      	ldr	r3, [pc, #236]	@ (200015b8 <ui_cmd_I2C+0x1c8>)
-200014ca:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
-200014ce:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005404) = 0; //616, CR2
-200014d0:	4b3a      	ldr	r3, [pc, #232]	@ (200015bc <ui_cmd_I2C+0x1cc>)
-200014d2:	2200      	movs	r2, #0
-200014d4:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40004404) = 0x2008000; //618, auto end, bit 15, NACK
-200014d6:	4b3b      	ldr	r3, [pc, #236]	@ (200015c4 <ui_cmd_I2C+0x1d4>)
-200014d8:	4a3b      	ldr	r2, [pc, #236]	@ (200015c8 <ui_cmd_I2C+0x1d8>)
-200014da:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x4000540C) = 0;//623,  OAR2
-200014dc:	4b38      	ldr	r3, [pc, #224]	@ (200015c0 <ui_cmd_I2C+0x1d0>)
-200014de:	2200      	movs	r2, #0
-200014e0:	601a      	str	r2, [r3, #0]
+    uint32_t busy = 0; // I2C_ISR BUSY: BUSY detection flag
+200014cc:	2300      	movs	r3, #0
+200014ce:	613b      	str	r3, [r7, #16]
+    while (((busy = *(volatile uint32_t *)(0x40005400)) & 0x8000) == 1) {}
+200014d0:	bf00      	nop
+200014d2:	4b25      	ldr	r3, [pc, #148]	@ (20001568 <ui_cmd_I2C+0x1bc>)
+200014d4:	681b      	ldr	r3, [r3, #0]
+200014d6:	613b      	str	r3, [r7, #16]
+200014d8:	693b      	ldr	r3, [r7, #16]
+200014da:	f403 4300 	and.w	r3, r3, #32768	@ 0x8000
+200014de:	2b01      	cmp	r3, #1
+200014e0:	d0f7      	beq.n	200014d2 <ui_cmd_I2C+0x126>
 
-	*(volatile uint32_t *)(0x40005400) = 1;//634, peripheral enable bit 0
-200014e2:	4b32      	ldr	r3, [pc, #200]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-200014e4:	2201      	movs	r2, #1
-200014e6:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005428) = 0x0;//1162, TX reg,
-200014e8:	4b38      	ldr	r3, [pc, #224]	@ (200015cc <ui_cmd_I2C+0x1dc>)
-200014ea:	2200      	movs	r2, #0
-200014ec:	601a      	str	r2, [r3, #0]
-	*(volatile uint32_t *)(0x40005404) = 0x2012082; //7217,      82 device address
-200014ee:	4b33      	ldr	r3, [pc, #204]	@ (200015bc <ui_cmd_I2C+0x1cc>)
-200014f0:	4a37      	ldr	r2, [pc, #220]	@ (200015d0 <ui_cmd_I2C+0x1e0>)
-200014f2:	601a      	str	r2, [r3, #0]
+    uint32_t RXNE_BUSY = 0; // RXNE: Receive data register
+200014e2:	2300      	movs	r3, #0
+200014e4:	60fb      	str	r3, [r7, #12]
+    while (((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0) {}
+200014e6:	bf00      	nop
+200014e8:	4b29      	ldr	r3, [pc, #164]	@ (20001590 <ui_cmd_I2C+0x1e4>)
+200014ea:	681b      	ldr	r3, [r3, #0]
+200014ec:	60fb      	str	r3, [r7, #12]
+200014ee:	68fb      	ldr	r3, [r7, #12]
+200014f0:	f003 0304 	and.w	r3, r3, #4
+200014f4:	2b00      	cmp	r3, #0
+200014f6:	d0f7      	beq.n	200014e8 <ui_cmd_I2C+0x13c>
 
-	//receive
-
-	uint32_t temp = 0; //I2C_ISR STOPF: STOP detection flag
-200014f4:	2300      	movs	r3, #0
-200014f6:	617b      	str	r3, [r7, #20]
-	while(((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0){
-200014f8:	bf00      	nop
-200014fa:	4b36      	ldr	r3, [pc, #216]	@ (200015d4 <ui_cmd_I2C+0x1e4>)
-200014fc:	681b      	ldr	r3, [r3, #0]
-200014fe:	617b      	str	r3, [r7, #20]
-20001500:	697b      	ldr	r3, [r7, #20]
-20001502:	f003 0320 	and.w	r3, r3, #32
-20001506:	2b00      	cmp	r3, #0
-20001508:	d0f7      	beq.n	200014fa <ui_cmd_I2C+0x10a>
-	}
-
-	*(volatile uint32_t *)(0x40005404) = 0x2012482; //7217 update CR2 register */
-2000150a:	4b2c      	ldr	r3, [pc, #176]	@ (200015bc <ui_cmd_I2C+0x1cc>)
-2000150c:	4a32      	ldr	r2, [pc, #200]	@ (200015d8 <ui_cmd_I2C+0x1e8>)
-2000150e:	601a      	str	r2, [r3, #0]
-
-	uint32_t busy = 0; //I2C_ISR BUSY: BUSY detection flag
-20001510:	2300      	movs	r3, #0
-20001512:	613b      	str	r3, [r7, #16]
-	while(((busy = *(volatile uint32_t *)(0x40005400)) & 0x8000) == 1){
-20001514:	bf00      	nop
-20001516:	4b25      	ldr	r3, [pc, #148]	@ (200015ac <ui_cmd_I2C+0x1bc>)
-20001518:	681b      	ldr	r3, [r3, #0]
-2000151a:	613b      	str	r3, [r7, #16]
-2000151c:	693b      	ldr	r3, [r7, #16]
-2000151e:	f403 4300 	and.w	r3, r3, #32768	@ 0x8000
-20001522:	2b01      	cmp	r3, #1
-20001524:	d0f7      	beq.n	20001516 <ui_cmd_I2C+0x126>
-	}
-
-	uint32_t RXNE_BUSY = 0; //RXNE: Receive data register
-20001526:	2300      	movs	r3, #0
-20001528:	60fb      	str	r3, [r7, #12]
-	while(((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0){
-2000152a:	bf00      	nop
-2000152c:	4b29      	ldr	r3, [pc, #164]	@ (200015d4 <ui_cmd_I2C+0x1e4>)
-2000152e:	681b      	ldr	r3, [r3, #0]
-20001530:	60fb      	str	r3, [r7, #12]
-20001532:	68fb      	ldr	r3, [r7, #12]
-20001534:	f003 0304 	and.w	r3, r3, #4
-20001538:	2b00      	cmp	r3, #0
-2000153a:	d0f7      	beq.n	2000152c <ui_cmd_I2C+0x13c>
-
-
-	/*
-	 * corrections for printing function
-	 */
-	*(volatile uint32_t *)(0x40021088) = 0x2;
-2000153c:	4b0a      	ldr	r3, [pc, #40]	@ (20001568 <ui_cmd_I2C+0x178>)
-2000153e:	2202      	movs	r2, #2
-20001540:	601a      	str	r2, [r3, #0]
-
+    // Corrections for printing function
+    // RCC->CCIPR = 0x2;
+    *(volatile uint32_t *)(0x40021088) = 0x2;
+200014f8:	4b0a      	ldr	r3, [pc, #40]	@ (20001524 <ui_cmd_I2C+0x178>)
+200014fa:	2202      	movs	r2, #2
+200014fc:	601a      	str	r2, [r3, #0]
 
     uint32_t received_data = *(volatile uint32_t *)(0x40005424);
-20001542:	4b26      	ldr	r3, [pc, #152]	@ (200015dc <ui_cmd_I2C+0x1ec>)
-20001544:	681b      	ldr	r3, [r3, #0]
-20001546:	60bb      	str	r3, [r7, #8]
+200014fe:	4b26      	ldr	r3, [pc, #152]	@ (20001598 <ui_cmd_I2C+0x1ec>)
+20001500:	681b      	ldr	r3, [r3, #0]
+20001502:	60bb      	str	r3, [r7, #8]
     printf("data");
-20001548:	4825      	ldr	r0, [pc, #148]	@ (200015e0 <ui_cmd_I2C+0x1f0>)
-2000154a:	f7ff fc17 	bl	20000d7c <printf>
+20001504:	4825      	ldr	r0, [pc, #148]	@ (2000159c <ui_cmd_I2C+0x1f0>)
+20001506:	f7ff fc39 	bl	20000d7c <printf>
     printf("Received data: 0x%08X\n", received_data);
-2000154e:	68b9      	ldr	r1, [r7, #8]
-20001550:	4824      	ldr	r0, [pc, #144]	@ (200015e4 <ui_cmd_I2C+0x1f4>)
-20001552:	f7ff fc13 	bl	20000d7c <printf>
-
-
+2000150a:	68b9      	ldr	r1, [r7, #8]
+2000150c:	4824      	ldr	r0, [pc, #144]	@ (200015a0 <ui_cmd_I2C+0x1f4>)
+2000150e:	f7ff fc35 	bl	20000d7c <printf>
 }
-20001556:	bf00      	nop
-20001558:	3718      	adds	r7, #24
-2000155a:	46bd      	mov	sp, r7
-2000155c:	bd80      	pop	{r7, pc}
-2000155e:	bf00      	nop
-20001560:	40021060 	.word	0x40021060
-20001564:	40021058 	.word	0x40021058
-20001568:	40021088 	.word	0x40021088
-2000156c:	40007004 	.word	0x40007004
-20001570:	4002104c 	.word	0x4002104c
-20001574:	32200000 	.word	0x32200000
-20001578:	48001808 	.word	0x48001808
-2000157c:	0c3c0fff 	.word	0x0c3c0fff
-20001580:	48001804 	.word	0x48001804
-20001584:	4800180c 	.word	0x4800180c
-20001588:	48001824 	.word	0x48001824
-2000158c:	00400cc0 	.word	0x00400cc0
-20001590:	48001800 	.word	0x48001800
-20001594:	3bebcaaa 	.word	0x3bebcaaa
-20001598:	3c3c0fff 	.word	0x3c3c0fff
-2000159c:	4800082c 	.word	0x4800082c
-200015a0:	04400cc0 	.word	0x04400cc0
-200015a4:	2bebcaaa 	.word	0x2bebcaaa
-200015a8:	48001841 	.word	0x48001841
-200015ac:	40005400 	.word	0x40005400
-200015b0:	40005410 	.word	0x40005410
-200015b4:	20303e5d 	.word	0x20303e5d
-200015b8:	40005408 	.word	0x40005408
-200015bc:	40005404 	.word	0x40005404
-200015c0:	4000540c 	.word	0x4000540c
-200015c4:	40004404 	.word	0x40004404
-200015c8:	02008000 	.word	0x02008000
-200015cc:	40005428 	.word	0x40005428
-200015d0:	02012082 	.word	0x02012082
-200015d4:	40005418 	.word	0x40005418
-200015d8:	02012482 	.word	0x02012482
-200015dc:	40005424 	.word	0x40005424
-200015e0:	200019a8 	.word	0x200019a8
-200015e4:	200019b0 	.word	0x200019b0
+20001512:	bf00      	nop
+20001514:	3718      	adds	r7, #24
+20001516:	46bd      	mov	sp, r7
+20001518:	bd80      	pop	{r7, pc}
+2000151a:	bf00      	nop
+2000151c:	40021060 	.word	0x40021060
+20001520:	40021058 	.word	0x40021058
+20001524:	40021088 	.word	0x40021088
+20001528:	40007004 	.word	0x40007004
+2000152c:	4002104c 	.word	0x4002104c
+20001530:	32200000 	.word	0x32200000
+20001534:	48001808 	.word	0x48001808
+20001538:	0c3c0fff 	.word	0x0c3c0fff
+2000153c:	48001804 	.word	0x48001804
+20001540:	4800180c 	.word	0x4800180c
+20001544:	48001824 	.word	0x48001824
+20001548:	00400cc0 	.word	0x00400cc0
+2000154c:	48001800 	.word	0x48001800
+20001550:	3bebcaaa 	.word	0x3bebcaaa
+20001554:	3c3c0fff 	.word	0x3c3c0fff
+20001558:	4800082c 	.word	0x4800082c
+2000155c:	04400cc0 	.word	0x04400cc0
+20001560:	2bebcaaa 	.word	0x2bebcaaa
+20001564:	48001841 	.word	0x48001841
+20001568:	40005400 	.word	0x40005400
+2000156c:	40005410 	.word	0x40005410
+20001570:	20303e5d 	.word	0x20303e5d
+20001574:	40005408 	.word	0x40005408
+20001578:	40005404 	.word	0x40005404
+2000157c:	4000540c 	.word	0x4000540c
+20001580:	40004404 	.word	0x40004404
+20001584:	02008000 	.word	0x02008000
+20001588:	40005428 	.word	0x40005428
+2000158c:	02012082 	.word	0x02012082
+20001590:	40005418 	.word	0x40005418
+20001594:	02012482 	.word	0x02012482
+20001598:	40005424 	.word	0x40005424
+2000159c:	20001958 	.word	0x20001958
+200015a0:	20001960 	.word	0x20001960
 
-200015e8 <READ_I2C_IO2>:
+200015a4 <READ_I2C_IO2>:
 
 static int READ_I2C_IO2(int reg_address)
 {
-200015e8:	b580      	push	{r7, lr}
-200015ea:	b086      	sub	sp, #24
-200015ec:	af00      	add	r7, sp, #0
-200015ee:	6078      	str	r0, [r7, #4]
+200015a4:	b580      	push	{r7, lr}
+200015a6:	b086      	sub	sp, #24
+200015a8:	af00      	add	r7, sp, #0
+200015aa:	6078      	str	r0, [r7, #4]
     I2C_Init();
-200015f0:	f7ff fe3c 	bl	2000126c <I2C_Init>
+200015ac:	f7ff fe5c 	bl	20001268 <I2C_Init>
     uint32_t temp = 0;
-200015f4:	2300      	movs	r3, #0
-200015f6:	617b      	str	r3, [r7, #20]
+200015b0:	2300      	movs	r3, #0
+200015b2:	617b      	str	r3, [r7, #20]
 
-    *(volatile uint32_t *)(0x40005428) = reg_address; // Register address
-200015f8:	4a13      	ldr	r2, [pc, #76]	@ (20001648 <READ_I2C_IO2+0x60>)
-200015fa:	687b      	ldr	r3, [r7, #4]
-200015fc:	6013      	str	r3, [r2, #0]
-    // *(volatile uint32_t *)(0x40005428) = value_to_send; // Data to send
+    I2C->I2C_TXDR = reg_address; // Register address
+200015b4:	4a13      	ldr	r2, [pc, #76]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015b6:	687b      	ldr	r3, [r7, #4]
+200015b8:	6293      	str	r3, [r2, #40]	@ 0x28
+    // I2C->I2C_TXDR = value_to_send; // Data to send
 
-    *(volatile uint32_t *)(0x40005404) = 0x2012084; // 7217, 82 device address
-200015fe:	4b13      	ldr	r3, [pc, #76]	@ (2000164c <READ_I2C_IO2+0x64>)
-20001600:	4a13      	ldr	r2, [pc, #76]	@ (20001650 <READ_I2C_IO2+0x68>)
-20001602:	601a      	str	r2, [r3, #0]
+    I2C->I2C_CR2 = 0x2012084; // 7217, 82 device address
+200015ba:	4b12      	ldr	r3, [pc, #72]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015bc:	4a12      	ldr	r2, [pc, #72]	@ (20001608 <READ_I2C_IO2+0x64>)
+200015be:	605a      	str	r2, [r3, #4]
 
-    //while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+    //while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
 
     // Wait for STOPF
     temp = 0;
-20001604:	2300      	movs	r3, #0
-20001606:	617b      	str	r3, [r7, #20]
-    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
-20001608:	bf00      	nop
-2000160a:	4b12      	ldr	r3, [pc, #72]	@ (20001654 <READ_I2C_IO2+0x6c>)
-2000160c:	681b      	ldr	r3, [r3, #0]
-2000160e:	617b      	str	r3, [r7, #20]
-20001610:	697b      	ldr	r3, [r7, #20]
-20001612:	f003 0320 	and.w	r3, r3, #32
-20001616:	2b00      	cmp	r3, #0
-20001618:	d0f7      	beq.n	2000160a <READ_I2C_IO2+0x22>
+200015c0:	2300      	movs	r3, #0
+200015c2:	617b      	str	r3, [r7, #20]
+    while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
+200015c4:	bf00      	nop
+200015c6:	4b0f      	ldr	r3, [pc, #60]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015c8:	699b      	ldr	r3, [r3, #24]
+200015ca:	617b      	str	r3, [r7, #20]
+200015cc:	697b      	ldr	r3, [r7, #20]
+200015ce:	f003 0320 	and.w	r3, r3, #32
+200015d2:	2b00      	cmp	r3, #0
+200015d4:	d0f7      	beq.n	200015c6 <READ_I2C_IO2+0x22>
 
-    *(volatile uint32_t *)(0x40005404) = 0x2012484; // 7217 update CR2 register
-2000161a:	4b0c      	ldr	r3, [pc, #48]	@ (2000164c <READ_I2C_IO2+0x64>)
-2000161c:	4a0e      	ldr	r2, [pc, #56]	@ (20001658 <READ_I2C_IO2+0x70>)
-2000161e:	601a      	str	r2, [r3, #0]
+    I2C->I2C_CR2 = 0x2012484; // 7217 update CR2 register
+200015d6:	4b0b      	ldr	r3, [pc, #44]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015d8:	4a0c      	ldr	r2, [pc, #48]	@ (2000160c <READ_I2C_IO2+0x68>)
+200015da:	605a      	str	r2, [r3, #4]
 
     // Wait for RXNE
     uint32_t RXNE_BUSY = 0;
-20001620:	2300      	movs	r3, #0
-20001622:	613b      	str	r3, [r7, #16]
-    while (((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0) {}
-20001624:	bf00      	nop
-20001626:	4b0b      	ldr	r3, [pc, #44]	@ (20001654 <READ_I2C_IO2+0x6c>)
-20001628:	681b      	ldr	r3, [r3, #0]
-2000162a:	613b      	str	r3, [r7, #16]
-2000162c:	693b      	ldr	r3, [r7, #16]
-2000162e:	f003 0304 	and.w	r3, r3, #4
-20001632:	2b00      	cmp	r3, #0
-20001634:	d0f7      	beq.n	20001626 <READ_I2C_IO2+0x3e>
+200015dc:	2300      	movs	r3, #0
+200015de:	613b      	str	r3, [r7, #16]
+    while (((RXNE_BUSY = I2C->I2C_ISR) & 0x4) == 0) {}
+200015e0:	bf00      	nop
+200015e2:	4b08      	ldr	r3, [pc, #32]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015e4:	699b      	ldr	r3, [r3, #24]
+200015e6:	613b      	str	r3, [r7, #16]
+200015e8:	693b      	ldr	r3, [r7, #16]
+200015ea:	f003 0304 	and.w	r3, r3, #4
+200015ee:	2b00      	cmp	r3, #0
+200015f0:	d0f7      	beq.n	200015e2 <READ_I2C_IO2+0x3e>
 
-    uint32_t received_data = *(volatile uint32_t *)(0x40005424);
-20001636:	4b09      	ldr	r3, [pc, #36]	@ (2000165c <READ_I2C_IO2+0x74>)
-20001638:	681b      	ldr	r3, [r3, #0]
-2000163a:	60fb      	str	r3, [r7, #12]
+    uint32_t received_data = I2C->I2C_RXDR;
+200015f2:	4b04      	ldr	r3, [pc, #16]	@ (20001604 <READ_I2C_IO2+0x60>)
+200015f4:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+200015f6:	60fb      	str	r3, [r7, #12]
 
     // Corrections for printing function
-//	*(volatile uint32_t *)(0x40021088) = 0x2;
-    //printf("Received data: 0x%08X\n", received_data);
+    // RCC->CCIPR = 0x2;
+    // printf("Received data: 0x%08X\n", received_data);
 
     return received_data;
-2000163c:	68fb      	ldr	r3, [r7, #12]
+200015f8:	68fb      	ldr	r3, [r7, #12]
 }
-2000163e:	4618      	mov	r0, r3
-20001640:	3718      	adds	r7, #24
-20001642:	46bd      	mov	sp, r7
-20001644:	bd80      	pop	{r7, pc}
-20001646:	bf00      	nop
-20001648:	40005428 	.word	0x40005428
-2000164c:	40005404 	.word	0x40005404
-20001650:	02012084 	.word	0x02012084
-20001654:	40005418 	.word	0x40005418
-20001658:	02012484 	.word	0x02012484
-2000165c:	40005424 	.word	0x40005424
+200015fa:	4618      	mov	r0, r3
+200015fc:	3718      	adds	r7, #24
+200015fe:	46bd      	mov	sp, r7
+20001600:	bd80      	pop	{r7, pc}
+20001602:	bf00      	nop
+20001604:	40005400 	.word	0x40005400
+20001608:	02012084 	.word	0x02012084
+2000160c:	02012484 	.word	0x02012484
 
-20001660 <ui_cmd_joystick>:
+20001610 <ui_cmd_joystick>:
 
 
 static int ui_cmd_joystick(int argc, char *argv[])
 {
-20001660:	b580      	push	{r7, lr}
-20001662:	b082      	sub	sp, #8
-20001664:	af00      	add	r7, sp, #0
-20001666:	6078      	str	r0, [r7, #4]
-20001668:	6039      	str	r1, [r7, #0]
+20001610:	b580      	push	{r7, lr}
+20001612:	b082      	sub	sp, #8
+20001614:	af00      	add	r7, sp, #0
+20001616:	6078      	str	r0, [r7, #4]
+20001618:	6039      	str	r1, [r7, #0]
     state_str = cmd_getarg(cmd, 0);
     state = atoi(state_str);
 
 */
     // *(volatile uint32_t *)(0x40005404) = 0x12084;
 	I2C_Init_INIT();
-2000166a:	f7ff fe2f 	bl	200012cc <I2C_Init_INIT>
+2000161a:	f7ff fe4d 	bl	200012b8 <I2C_Init_INIT>
 	//*(volatile uint32_t *)(0x40021088) = 0x2;
 
 
     while(1){
 
     	if((READ_I2C_IO2(0x10) & 1) == 0){
-2000166e:	2010      	movs	r0, #16
-20001670:	f7ff ffba 	bl	200015e8 <READ_I2C_IO2>
-20001674:	4603      	mov	r3, r0
-20001676:	f003 0301 	and.w	r3, r3, #1
-2000167a:	2b00      	cmp	r3, #0
-2000167c:	d103      	bne.n	20001686 <ui_cmd_joystick+0x26>
+2000161e:	2010      	movs	r0, #16
+20001620:	f7ff ffc0 	bl	200015a4 <READ_I2C_IO2>
+20001624:	4603      	mov	r3, r0
+20001626:	f003 0301 	and.w	r3, r3, #1
+2000162a:	2b00      	cmp	r3, #0
+2000162c:	d103      	bne.n	20001636 <ui_cmd_joystick+0x26>
     		printf("SEL\r");
-2000167e:	481c      	ldr	r0, [pc, #112]	@ (200016f0 <ui_cmd_joystick+0x90>)
-20001680:	f7ff fb7c 	bl	20000d7c <printf>
+2000162e:	481c      	ldr	r0, [pc, #112]	@ (200016a0 <ui_cmd_joystick+0x90>)
+20001630:	f7ff fba4 	bl	20000d7c <printf>
     		break;
-20001684:	e02c      	b.n	200016e0 <ui_cmd_joystick+0x80>
+20001634:	e02c      	b.n	20001690 <ui_cmd_joystick+0x80>
     	}
     	if((READ_I2C_IO2(0x10) & 2) == 0){
-20001686:	2010      	movs	r0, #16
-20001688:	f7ff ffae 	bl	200015e8 <READ_I2C_IO2>
-2000168c:	4603      	mov	r3, r0
-2000168e:	f003 0302 	and.w	r3, r3, #2
-20001692:	2b00      	cmp	r3, #0
-20001694:	d102      	bne.n	2000169c <ui_cmd_joystick+0x3c>
+20001636:	2010      	movs	r0, #16
+20001638:	f7ff ffb4 	bl	200015a4 <READ_I2C_IO2>
+2000163c:	4603      	mov	r3, r0
+2000163e:	f003 0302 	and.w	r3, r3, #2
+20001642:	2b00      	cmp	r3, #0
+20001644:	d102      	bne.n	2000164c <ui_cmd_joystick+0x3c>
     		printf("DOWN   \r");
-20001696:	4817      	ldr	r0, [pc, #92]	@ (200016f4 <ui_cmd_joystick+0x94>)
-20001698:	f7ff fb70 	bl	20000d7c <printf>
+20001646:	4817      	ldr	r0, [pc, #92]	@ (200016a4 <ui_cmd_joystick+0x94>)
+20001648:	f7ff fb98 	bl	20000d7c <printf>
     	}
     	if((READ_I2C_IO2(0x10) & 4) == 0){
-2000169c:	2010      	movs	r0, #16
-2000169e:	f7ff ffa3 	bl	200015e8 <READ_I2C_IO2>
-200016a2:	4603      	mov	r3, r0
-200016a4:	f003 0304 	and.w	r3, r3, #4
-200016a8:	2b00      	cmp	r3, #0
-200016aa:	d102      	bne.n	200016b2 <ui_cmd_joystick+0x52>
+2000164c:	2010      	movs	r0, #16
+2000164e:	f7ff ffa9 	bl	200015a4 <READ_I2C_IO2>
+20001652:	4603      	mov	r3, r0
+20001654:	f003 0304 	and.w	r3, r3, #4
+20001658:	2b00      	cmp	r3, #0
+2000165a:	d102      	bne.n	20001662 <ui_cmd_joystick+0x52>
     		printf("LEFT \r");
-200016ac:	4812      	ldr	r0, [pc, #72]	@ (200016f8 <ui_cmd_joystick+0x98>)
-200016ae:	f7ff fb65 	bl	20000d7c <printf>
+2000165c:	4812      	ldr	r0, [pc, #72]	@ (200016a8 <ui_cmd_joystick+0x98>)
+2000165e:	f7ff fb8d 	bl	20000d7c <printf>
     	}
     	if((READ_I2C_IO2(0x10) & 8) == 0){
-200016b2:	2010      	movs	r0, #16
-200016b4:	f7ff ff98 	bl	200015e8 <READ_I2C_IO2>
-200016b8:	4603      	mov	r3, r0
-200016ba:	f003 0308 	and.w	r3, r3, #8
-200016be:	2b00      	cmp	r3, #0
-200016c0:	d102      	bne.n	200016c8 <ui_cmd_joystick+0x68>
+20001662:	2010      	movs	r0, #16
+20001664:	f7ff ff9e 	bl	200015a4 <READ_I2C_IO2>
+20001668:	4603      	mov	r3, r0
+2000166a:	f003 0308 	and.w	r3, r3, #8
+2000166e:	2b00      	cmp	r3, #0
+20001670:	d102      	bne.n	20001678 <ui_cmd_joystick+0x68>
     		printf("RIGHT \r");
-200016c2:	480e      	ldr	r0, [pc, #56]	@ (200016fc <ui_cmd_joystick+0x9c>)
-200016c4:	f7ff fb5a 	bl	20000d7c <printf>
+20001672:	480e      	ldr	r0, [pc, #56]	@ (200016ac <ui_cmd_joystick+0x9c>)
+20001674:	f7ff fb82 	bl	20000d7c <printf>
     	}
     	if((READ_I2C_IO2(0x10) & 16) == 0){
-200016c8:	2010      	movs	r0, #16
-200016ca:	f7ff ff8d 	bl	200015e8 <READ_I2C_IO2>
-200016ce:	4603      	mov	r3, r0
-200016d0:	f003 0310 	and.w	r3, r3, #16
-200016d4:	2b00      	cmp	r3, #0
-200016d6:	d1ca      	bne.n	2000166e <ui_cmd_joystick+0xe>
+20001678:	2010      	movs	r0, #16
+2000167a:	f7ff ff93 	bl	200015a4 <READ_I2C_IO2>
+2000167e:	4603      	mov	r3, r0
+20001680:	f003 0310 	and.w	r3, r3, #16
+20001684:	2b00      	cmp	r3, #0
+20001686:	d1ca      	bne.n	2000161e <ui_cmd_joystick+0xe>
     		printf("UP      \r");
-200016d8:	4809      	ldr	r0, [pc, #36]	@ (20001700 <ui_cmd_joystick+0xa0>)
-200016da:	f7ff fb4f 	bl	20000d7c <printf>
+20001688:	4809      	ldr	r0, [pc, #36]	@ (200016b0 <ui_cmd_joystick+0xa0>)
+2000168a:	f7ff fb77 	bl	20000d7c <printf>
     	if((READ_I2C_IO2(0x10) & 1) == 0){
-200016de:	e7c6      	b.n	2000166e <ui_cmd_joystick+0xe>
+2000168e:	e7c6      	b.n	2000161e <ui_cmd_joystick+0xe>
     	}
 
     }
     printf("joystick end");
-200016e0:	4808      	ldr	r0, [pc, #32]	@ (20001704 <ui_cmd_joystick+0xa4>)
-200016e2:	f7ff fb4b 	bl	20000d7c <printf>
+20001690:	4808      	ldr	r0, [pc, #32]	@ (200016b4 <ui_cmd_joystick+0xa4>)
+20001692:	f7ff fb73 	bl	20000d7c <printf>
 
     return 0;
-200016e6:	2300      	movs	r3, #0
+20001696:	2300      	movs	r3, #0
 }
-200016e8:	4618      	mov	r0, r3
-200016ea:	3708      	adds	r7, #8
-200016ec:	46bd      	mov	sp, r7
-200016ee:	bd80      	pop	{r7, pc}
-200016f0:	200019c8 	.word	0x200019c8
-200016f4:	200019d0 	.word	0x200019d0
-200016f8:	200019dc 	.word	0x200019dc
-200016fc:	200019e4 	.word	0x200019e4
-20001700:	200019ec 	.word	0x200019ec
-20001704:	200019f8 	.word	0x200019f8
+20001698:	4618      	mov	r0, r3
+2000169a:	3708      	adds	r7, #8
+2000169c:	46bd      	mov	sp, r7
+2000169e:	bd80      	pop	{r7, pc}
+200016a0:	20001978 	.word	0x20001978
+200016a4:	20001980 	.word	0x20001980
+200016a8:	2000198c 	.word	0x2000198c
+200016ac:	20001994 	.word	0x20001994
+200016b0:	2000199c 	.word	0x2000199c
+200016b4:	200019a8 	.word	0x200019a8
 
-20001708 <uart_handler>:
+200016b8 <uart_handler>:
 
 
 static int uart_handler(int argc, char *argv[]){
-20001708:	b580      	push	{r7, lr}
-2000170a:	b082      	sub	sp, #8
-2000170c:	af00      	add	r7, sp, #0
-2000170e:	6078      	str	r0, [r7, #4]
-20001710:	6039      	str	r1, [r7, #0]
+200016b8:	b580      	push	{r7, lr}
+200016ba:	b082      	sub	sp, #8
+200016bc:	af00      	add	r7, sp, #0
+200016be:	6078      	str	r0, [r7, #4]
+200016c0:	6039      	str	r1, [r7, #0]
 
 	*(volatile uint32_t *)0xE000ED08 = 0x20000000;
-20001712:	4b08      	ldr	r3, [pc, #32]	@ (20001734 <uart_handler+0x2c>)
-20001714:	f04f 5200 	mov.w	r2, #536870912	@ 0x20000000
-20001718:	601a      	str	r2, [r3, #0]
+200016c2:	4b08      	ldr	r3, [pc, #32]	@ (200016e4 <uart_handler+0x2c>)
+200016c4:	f04f 5200 	mov.w	r2, #536870912	@ 0x20000000
+200016c8:	601a      	str	r2, [r3, #0]
 
 	*(volatile uint32_t *)0xE000E104 = 0x20;
-2000171a:	4b07      	ldr	r3, [pc, #28]	@ (20001738 <uart_handler+0x30>)
-2000171c:	2220      	movs	r2, #32
-2000171e:	601a      	str	r2, [r3, #0]
+200016ca:	4b07      	ldr	r3, [pc, #28]	@ (200016e8 <uart_handler+0x30>)
+200016cc:	2220      	movs	r2, #32
+200016ce:	601a      	str	r2, [r3, #0]
 //	(*(volatile uint32_t *)0x40021058)|= (1 << 17); //RCC->APB1ENR1
 
 	//(*(volatile uint32_t *)0x4000440C) = 0xD0;
 	(*(volatile uint32_t *)0x40013800) |= 0x2D; //10 1101
-20001720:	4b06      	ldr	r3, [pc, #24]	@ (2000173c <uart_handler+0x34>)
-20001722:	681b      	ldr	r3, [r3, #0]
-20001724:	4a05      	ldr	r2, [pc, #20]	@ (2000173c <uart_handler+0x34>)
-20001726:	f043 032d 	orr.w	r3, r3, #45	@ 0x2d
-2000172a:	6013      	str	r3, [r2, #0]
+200016d0:	4b06      	ldr	r3, [pc, #24]	@ (200016ec <uart_handler+0x34>)
+200016d2:	681b      	ldr	r3, [r3, #0]
+200016d4:	4a05      	ldr	r2, [pc, #20]	@ (200016ec <uart_handler+0x34>)
+200016d6:	f043 032d 	orr.w	r3, r3, #45	@ 0x2d
+200016da:	6013      	str	r3, [r2, #0]
 //	(*(volatile uint32_t *)0x40004400) |= 0x2D;
 
 
 	//(*(volatile uint32_t *)0xE000E104) = 0x7;
 	while(1){
 		printf("hello\n");
-2000172c:	4804      	ldr	r0, [pc, #16]	@ (20001740 <uart_handler+0x38>)
-2000172e:	f7ff fb25 	bl	20000d7c <printf>
-20001732:	e7fb      	b.n	2000172c <uart_handler+0x24>
-20001734:	e000ed08 	.word	0xe000ed08
-20001738:	e000e104 	.word	0xe000e104
-2000173c:	40013800 	.word	0x40013800
-20001740:	20001a08 	.word	0x20001a08
+200016dc:	4804      	ldr	r0, [pc, #16]	@ (200016f0 <uart_handler+0x38>)
+200016de:	f7ff fb4d 	bl	20000d7c <printf>
+200016e2:	e7fb      	b.n	200016dc <uart_handler+0x24>
+200016e4:	e000ed08 	.word	0xe000ed08
+200016e8:	e000e104 	.word	0xe000e104
+200016ec:	40013800 	.word	0x40013800
+200016f0:	200019b8 	.word	0x200019b8
 
-20001744 <_strtoul_l.constprop.0>:
-20001744:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
-20001748:	4e34      	ldr	r6, [pc, #208]	@ (2000181c <_strtoul_l.constprop.0+0xd8>)
-2000174a:	4686      	mov	lr, r0
-2000174c:	460d      	mov	r5, r1
-2000174e:	4628      	mov	r0, r5
-20001750:	f815 4b01 	ldrb.w	r4, [r5], #1
-20001754:	5d37      	ldrb	r7, [r6, r4]
-20001756:	f017 0708 	ands.w	r7, r7, #8
-2000175a:	d1f8      	bne.n	2000174e <_strtoul_l.constprop.0+0xa>
-2000175c:	2c2d      	cmp	r4, #45	@ 0x2d
-2000175e:	d12f      	bne.n	200017c0 <_strtoul_l.constprop.0+0x7c>
-20001760:	782c      	ldrb	r4, [r5, #0]
-20001762:	2701      	movs	r7, #1
-20001764:	1c85      	adds	r5, r0, #2
-20001766:	f033 0010 	bics.w	r0, r3, #16
-2000176a:	d109      	bne.n	20001780 <_strtoul_l.constprop.0+0x3c>
-2000176c:	2c30      	cmp	r4, #48	@ 0x30
-2000176e:	d12c      	bne.n	200017ca <_strtoul_l.constprop.0+0x86>
-20001770:	7828      	ldrb	r0, [r5, #0]
-20001772:	f000 00df 	and.w	r0, r0, #223	@ 0xdf
-20001776:	2858      	cmp	r0, #88	@ 0x58
-20001778:	d127      	bne.n	200017ca <_strtoul_l.constprop.0+0x86>
-2000177a:	786c      	ldrb	r4, [r5, #1]
-2000177c:	2310      	movs	r3, #16
-2000177e:	3502      	adds	r5, #2
-20001780:	f04f 38ff 	mov.w	r8, #4294967295	@ 0xffffffff
-20001784:	2600      	movs	r6, #0
-20001786:	fbb8 f8f3 	udiv	r8, r8, r3
-2000178a:	fb03 f908 	mul.w	r9, r3, r8
-2000178e:	ea6f 0909 	mvn.w	r9, r9
-20001792:	4630      	mov	r0, r6
-20001794:	f1a4 0c30 	sub.w	ip, r4, #48	@ 0x30
-20001798:	f1bc 0f09 	cmp.w	ip, #9
-2000179c:	d81c      	bhi.n	200017d8 <_strtoul_l.constprop.0+0x94>
-2000179e:	4664      	mov	r4, ip
-200017a0:	42a3      	cmp	r3, r4
-200017a2:	dd2a      	ble.n	200017fa <_strtoul_l.constprop.0+0xb6>
-200017a4:	f1b6 3fff 	cmp.w	r6, #4294967295	@ 0xffffffff
-200017a8:	d007      	beq.n	200017ba <_strtoul_l.constprop.0+0x76>
-200017aa:	4580      	cmp	r8, r0
-200017ac:	d322      	bcc.n	200017f4 <_strtoul_l.constprop.0+0xb0>
-200017ae:	d101      	bne.n	200017b4 <_strtoul_l.constprop.0+0x70>
-200017b0:	45a1      	cmp	r9, r4
-200017b2:	db1f      	blt.n	200017f4 <_strtoul_l.constprop.0+0xb0>
-200017b4:	fb00 4003 	mla	r0, r0, r3, r4
-200017b8:	2601      	movs	r6, #1
-200017ba:	f815 4b01 	ldrb.w	r4, [r5], #1
-200017be:	e7e9      	b.n	20001794 <_strtoul_l.constprop.0+0x50>
-200017c0:	2c2b      	cmp	r4, #43	@ 0x2b
-200017c2:	bf04      	itt	eq
-200017c4:	782c      	ldrbeq	r4, [r5, #0]
-200017c6:	1c85      	addeq	r5, r0, #2
-200017c8:	e7cd      	b.n	20001766 <_strtoul_l.constprop.0+0x22>
-200017ca:	2b00      	cmp	r3, #0
-200017cc:	d1d8      	bne.n	20001780 <_strtoul_l.constprop.0+0x3c>
-200017ce:	2c30      	cmp	r4, #48	@ 0x30
-200017d0:	bf0c      	ite	eq
-200017d2:	2308      	moveq	r3, #8
-200017d4:	230a      	movne	r3, #10
-200017d6:	e7d3      	b.n	20001780 <_strtoul_l.constprop.0+0x3c>
-200017d8:	f1a4 0c41 	sub.w	ip, r4, #65	@ 0x41
-200017dc:	f1bc 0f19 	cmp.w	ip, #25
-200017e0:	d801      	bhi.n	200017e6 <_strtoul_l.constprop.0+0xa2>
-200017e2:	3c37      	subs	r4, #55	@ 0x37
-200017e4:	e7dc      	b.n	200017a0 <_strtoul_l.constprop.0+0x5c>
-200017e6:	f1a4 0c61 	sub.w	ip, r4, #97	@ 0x61
-200017ea:	f1bc 0f19 	cmp.w	ip, #25
-200017ee:	d804      	bhi.n	200017fa <_strtoul_l.constprop.0+0xb6>
-200017f0:	3c57      	subs	r4, #87	@ 0x57
-200017f2:	e7d5      	b.n	200017a0 <_strtoul_l.constprop.0+0x5c>
-200017f4:	f04f 36ff 	mov.w	r6, #4294967295	@ 0xffffffff
-200017f8:	e7df      	b.n	200017ba <_strtoul_l.constprop.0+0x76>
-200017fa:	1c73      	adds	r3, r6, #1
-200017fc:	d106      	bne.n	2000180c <_strtoul_l.constprop.0+0xc8>
-200017fe:	2322      	movs	r3, #34	@ 0x22
-20001800:	f8ce 3000 	str.w	r3, [lr]
-20001804:	4630      	mov	r0, r6
-20001806:	b932      	cbnz	r2, 20001816 <_strtoul_l.constprop.0+0xd2>
-20001808:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
-2000180c:	b107      	cbz	r7, 20001810 <_strtoul_l.constprop.0+0xcc>
-2000180e:	4240      	negs	r0, r0
-20001810:	2a00      	cmp	r2, #0
-20001812:	d0f9      	beq.n	20001808 <_strtoul_l.constprop.0+0xc4>
-20001814:	b106      	cbz	r6, 20001818 <_strtoul_l.constprop.0+0xd4>
-20001816:	1e69      	subs	r1, r5, #1
-20001818:	6011      	str	r1, [r2, #0]
-2000181a:	e7f5      	b.n	20001808 <_strtoul_l.constprop.0+0xc4>
-2000181c:	20001a42 	.word	0x20001a42
+200016f4 <_strtoul_l.constprop.0>:
+200016f4:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+200016f8:	4e34      	ldr	r6, [pc, #208]	@ (200017cc <_strtoul_l.constprop.0+0xd8>)
+200016fa:	4686      	mov	lr, r0
+200016fc:	460d      	mov	r5, r1
+200016fe:	4628      	mov	r0, r5
+20001700:	f815 4b01 	ldrb.w	r4, [r5], #1
+20001704:	5d37      	ldrb	r7, [r6, r4]
+20001706:	f017 0708 	ands.w	r7, r7, #8
+2000170a:	d1f8      	bne.n	200016fe <_strtoul_l.constprop.0+0xa>
+2000170c:	2c2d      	cmp	r4, #45	@ 0x2d
+2000170e:	d12f      	bne.n	20001770 <_strtoul_l.constprop.0+0x7c>
+20001710:	782c      	ldrb	r4, [r5, #0]
+20001712:	2701      	movs	r7, #1
+20001714:	1c85      	adds	r5, r0, #2
+20001716:	f033 0010 	bics.w	r0, r3, #16
+2000171a:	d109      	bne.n	20001730 <_strtoul_l.constprop.0+0x3c>
+2000171c:	2c30      	cmp	r4, #48	@ 0x30
+2000171e:	d12c      	bne.n	2000177a <_strtoul_l.constprop.0+0x86>
+20001720:	7828      	ldrb	r0, [r5, #0]
+20001722:	f000 00df 	and.w	r0, r0, #223	@ 0xdf
+20001726:	2858      	cmp	r0, #88	@ 0x58
+20001728:	d127      	bne.n	2000177a <_strtoul_l.constprop.0+0x86>
+2000172a:	786c      	ldrb	r4, [r5, #1]
+2000172c:	2310      	movs	r3, #16
+2000172e:	3502      	adds	r5, #2
+20001730:	f04f 38ff 	mov.w	r8, #4294967295	@ 0xffffffff
+20001734:	2600      	movs	r6, #0
+20001736:	fbb8 f8f3 	udiv	r8, r8, r3
+2000173a:	fb03 f908 	mul.w	r9, r3, r8
+2000173e:	ea6f 0909 	mvn.w	r9, r9
+20001742:	4630      	mov	r0, r6
+20001744:	f1a4 0c30 	sub.w	ip, r4, #48	@ 0x30
+20001748:	f1bc 0f09 	cmp.w	ip, #9
+2000174c:	d81c      	bhi.n	20001788 <_strtoul_l.constprop.0+0x94>
+2000174e:	4664      	mov	r4, ip
+20001750:	42a3      	cmp	r3, r4
+20001752:	dd2a      	ble.n	200017aa <_strtoul_l.constprop.0+0xb6>
+20001754:	f1b6 3fff 	cmp.w	r6, #4294967295	@ 0xffffffff
+20001758:	d007      	beq.n	2000176a <_strtoul_l.constprop.0+0x76>
+2000175a:	4580      	cmp	r8, r0
+2000175c:	d322      	bcc.n	200017a4 <_strtoul_l.constprop.0+0xb0>
+2000175e:	d101      	bne.n	20001764 <_strtoul_l.constprop.0+0x70>
+20001760:	45a1      	cmp	r9, r4
+20001762:	db1f      	blt.n	200017a4 <_strtoul_l.constprop.0+0xb0>
+20001764:	fb00 4003 	mla	r0, r0, r3, r4
+20001768:	2601      	movs	r6, #1
+2000176a:	f815 4b01 	ldrb.w	r4, [r5], #1
+2000176e:	e7e9      	b.n	20001744 <_strtoul_l.constprop.0+0x50>
+20001770:	2c2b      	cmp	r4, #43	@ 0x2b
+20001772:	bf04      	itt	eq
+20001774:	782c      	ldrbeq	r4, [r5, #0]
+20001776:	1c85      	addeq	r5, r0, #2
+20001778:	e7cd      	b.n	20001716 <_strtoul_l.constprop.0+0x22>
+2000177a:	2b00      	cmp	r3, #0
+2000177c:	d1d8      	bne.n	20001730 <_strtoul_l.constprop.0+0x3c>
+2000177e:	2c30      	cmp	r4, #48	@ 0x30
+20001780:	bf0c      	ite	eq
+20001782:	2308      	moveq	r3, #8
+20001784:	230a      	movne	r3, #10
+20001786:	e7d3      	b.n	20001730 <_strtoul_l.constprop.0+0x3c>
+20001788:	f1a4 0c41 	sub.w	ip, r4, #65	@ 0x41
+2000178c:	f1bc 0f19 	cmp.w	ip, #25
+20001790:	d801      	bhi.n	20001796 <_strtoul_l.constprop.0+0xa2>
+20001792:	3c37      	subs	r4, #55	@ 0x37
+20001794:	e7dc      	b.n	20001750 <_strtoul_l.constprop.0+0x5c>
+20001796:	f1a4 0c61 	sub.w	ip, r4, #97	@ 0x61
+2000179a:	f1bc 0f19 	cmp.w	ip, #25
+2000179e:	d804      	bhi.n	200017aa <_strtoul_l.constprop.0+0xb6>
+200017a0:	3c57      	subs	r4, #87	@ 0x57
+200017a2:	e7d5      	b.n	20001750 <_strtoul_l.constprop.0+0x5c>
+200017a4:	f04f 36ff 	mov.w	r6, #4294967295	@ 0xffffffff
+200017a8:	e7df      	b.n	2000176a <_strtoul_l.constprop.0+0x76>
+200017aa:	1c73      	adds	r3, r6, #1
+200017ac:	d106      	bne.n	200017bc <_strtoul_l.constprop.0+0xc8>
+200017ae:	2322      	movs	r3, #34	@ 0x22
+200017b0:	f8ce 3000 	str.w	r3, [lr]
+200017b4:	4630      	mov	r0, r6
+200017b6:	b932      	cbnz	r2, 200017c6 <_strtoul_l.constprop.0+0xd2>
+200017b8:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+200017bc:	b107      	cbz	r7, 200017c0 <_strtoul_l.constprop.0+0xcc>
+200017be:	4240      	negs	r0, r0
+200017c0:	2a00      	cmp	r2, #0
+200017c2:	d0f9      	beq.n	200017b8 <_strtoul_l.constprop.0+0xc4>
+200017c4:	b106      	cbz	r6, 200017c8 <_strtoul_l.constprop.0+0xd4>
+200017c6:	1e69      	subs	r1, r5, #1
+200017c8:	6011      	str	r1, [r2, #0]
+200017ca:	e7f5      	b.n	200017b8 <_strtoul_l.constprop.0+0xc4>
+200017cc:	200019f2 	.word	0x200019f2
 
-20001820 <strtoul>:
-20001820:	4613      	mov	r3, r2
-20001822:	460a      	mov	r2, r1
-20001824:	4601      	mov	r1, r0
-20001826:	4802      	ldr	r0, [pc, #8]	@ (20001830 <strtoul+0x10>)
-20001828:	6800      	ldr	r0, [r0, #0]
-2000182a:	f7ff bf8b 	b.w	20001744 <_strtoul_l.constprop.0>
-2000182e:	bf00      	nop
-20001830:	20001b94 	.word	0x20001b94
+200017d0 <strtoul>:
+200017d0:	4613      	mov	r3, r2
+200017d2:	460a      	mov	r2, r1
+200017d4:	4601      	mov	r1, r0
+200017d6:	4802      	ldr	r0, [pc, #8]	@ (200017e0 <strtoul+0x10>)
+200017d8:	6800      	ldr	r0, [r0, #0]
+200017da:	f7ff bf8b 	b.w	200016f4 <_strtoul_l.constprop.0>
+200017de:	bf00      	nop
+200017e0:	20001b44 	.word	0x20001b44
 
-20001834 <_init>:
-20001834:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-20001836:	bf00      	nop
-20001838:	bcf8      	pop	{r3, r4, r5, r6, r7}
-2000183a:	bc08      	pop	{r3}
-2000183c:	469e      	mov	lr, r3
-2000183e:	4770      	bx	lr
+200017e4 <_init>:
+200017e4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+200017e6:	bf00      	nop
+200017e8:	bcf8      	pop	{r3, r4, r5, r6, r7}
+200017ea:	bc08      	pop	{r3}
+200017ec:	469e      	mov	lr, r3
+200017ee:	4770      	bx	lr
 
-20001840 <_fini>:
-20001840:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-20001842:	bf00      	nop
-20001844:	bcf8      	pop	{r3, r4, r5, r6, r7}
-20001846:	bc08      	pop	{r3}
-20001848:	469e      	mov	lr, r3
-2000184a:	4770      	bx	lr
+200017f0 <_fini>:
+200017f0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+200017f2:	bf00      	nop
+200017f4:	bcf8      	pop	{r3, r4, r5, r6, r7}
+200017f6:	bc08      	pop	{r3}
+200017f8:	469e      	mov	lr, r3
+200017fa:	4770      	bx	lr

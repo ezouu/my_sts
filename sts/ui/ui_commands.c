@@ -147,10 +147,6 @@ void ui_cmd_edit(int argc, char *argv[])
 
 }
 
-#define GPIOA_BASE 0x48000000
-#define GPIOB_BASE 0x48000400
-#define GPIOC_BASE 0x48000800
-
 
 void LED_Init(void) {
 
@@ -161,158 +157,204 @@ void LED_Init(void) {
 
     RCC->APB1ENR1 |= (1 << 28);
 
-    *(volatile uint32_t *)(GPIOC_BASE) = 0x4;
+    //*(volatile uint32_t *)(GPIOC_BASE) = 0x4;
+    GPIOC->GPIOx_MODER = 0x4;
 
 
-    *(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
+    //*(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
+    GPIOC->GPIOx_PUPDR = 0x0;
+
+
 }
 
 
 void I2C_Init(void) {
 
-
-
     // Transmit
-    *(volatile uint32_t *)(0x40005400) = 0; // I2C_CR1, clear
-    *(volatile uint32_t *)(0x40005410) = 0x20303e5d; // I2C timing configuration
-    *(volatile uint32_t *)(0x40005408) = 0; // I2C OAR1 configuration
-    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
-    *(volatile uint32_t *)(0x40005404) = 0; // I2C CR2 configuration
-    *(volatile uint32_t *)(0x40004404) = 0x2008000; // Auto end, bit 15, NACK
-    *(volatile uint32_t *)(0x4000540C) = 0; // I2C OAR2 configuration
-
-    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
+    I2C->I2C_CR1 = 0; // I2C_CR1, clear
+    I2C->I2C_TIMINGR = 0x20303e5d; // I2C timing configuration
+    I2C->I2C_OAR1 = 0; // I2C OAR1 configuration
+    I2C->I2C_OAR1 = 0x8000; // Ack own address1 mode
+    I2C->I2C_CR2 = 0; // I2C CR2 configuration
+    USART -> USART_CR2 = 0x2008000; // Auto end, bit 15, NACK
+    I2C->I2C_OAR2 = 0; // I2C OAR2 configuration
+    I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
 }
 
 
 void I2C_Init_INIT(void) {
     // Initialization and clock configuration
-    *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
-    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
-  //  *(volatile uint32_t *)(0x40021088) = 0; // RCC I2C clock selection
-    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
-    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
-    *(volatile uint32_t *)(0x40021058) = 0x32200000;
-
+    RCC->APB2ENR = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
+    RCC->APB1ENR1 = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
+    // RCC->CCIPR = 0; // RCC I2C clock selection (commented out as it was in the original code)
+    PWR->PWR_CR2 = 0x200; // PWR_CR2 enable
+    RCC->AHB2ENR = 0x20ff; // GPIOG_CLK_ENABLE
+    RCC->APB1ENR1 = 0x32200000;
 
     // GPIO configuration
-    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
-    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
-    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
-    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
-    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
-    *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
-    *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-    *(volatile uint32_t *)(0x4800082C) = 0x0; // Activate pull up or pull down GPIO_PUPDR
-    *(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY
-    *(volatile uint32_t *)(0x40005400) = 0; // Disable the selected I2C peripheral
-    *(volatile uint32_t *)(0x40005410) = 0x20303E5D; // Configure I2Cx: Frequency range
-    *(volatile uint32_t *)(0x40005408) = 0; // I2Cx OAR1 Configuration
-    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
-    *(volatile uint32_t *)(0x40005404) = 0; // Clear the I2C ADD10 bit
-    *(volatile uint32_t *)(0x4000540C) = 0; // I2Cx OAR2 Configuration
-    *(volatile uint32_t *)(0x40005400) = 0; // Configure I2Cx: Generalcall and NoStretch mode
-    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
+    GPIOG->GPIOx_OSPEEDR = 0xc3c0fff; // GPIOx_OSPEEDR
+    GPIOG->GPIOx_OTYPER = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
+    GPIOG->GPIOx_PUPDR = 0x4000000; // GPIOG_PUPDR
+    GPIOG->GPIOx_AFRL = 0x400cc0; // Configure Alternate function mapped with the current IO
+    GPIOG->GPIOx_MODER = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+    GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff; // Configure the IO Speed
+    GPIOG->GPIOx_OTYPER = 0x6000; // GPIO_OTYPER
+    GPIOA->GPIOx_PUPDR = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+    GPIOG->GPIOx_AFRL = 0x4400cc0; // Configure Alternate function mapped with the current IO
+    GPIOG->GPIOx_MODER = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+    GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff; // Configure the IO Speed
+    GPIOG->GPIOx_OTYPER = 0x6000; // GPIO_OTYPER
+    GPIOA->GPIOx_PUPDR = 0x0; // Activate pull up or pull down GPIO_PUPDR
+    //*(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY (specific address not covered by provided structures)
 
+    I2C->I2C_CR1 = 0; // Disable the selected I2C peripheral
+    I2C->I2C_TIMINGR = 0x20303E5D; // Configure I2Cx: Frequency range
+    I2C->I2C_OAR1 = 0; // I2Cx OAR1 Configuration
+    I2C->I2C_OAR1 = 0x8000; // Ack own address1 mode
+    I2C->I2C_CR2 = 0; // Clear the I2C ADD10 bit
+    I2C->I2C_OAR2 = 0; // I2Cx OAR2 Configuration
+    I2C->I2C_CR1 = 0; // Configure I2Cx: Generalcall and NoStretch mode
+    I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
 }
-
 
 
 void ui_cmd_I2C(int argc, char *argv[])
 {
-
+    // RCC->APB2ENR = 0x4001;
     *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
 
-    *(volatile uint32_t *)(0x40021058) = 0x10000000;//__HAL_RCC_PWR_CLK_ENABLE();
+    // RCC->APB1ENR1 = 0x10000000;
+    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
 
+    // RCC->CCIPR = 0;
+    *(volatile uint32_t *)(0x40021088) = 0; // RCC i2c clock selection
 
-	*(volatile uint32_t *)(0x40021088) = 0; //RCC i2c clock selection
+    // PWR->PWR_CR2 = 0x200;
+    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
 
-    *(volatile uint32_t *)(0x40007004) = 0x200;   // PWR_CR2 enable
+    // RCC->AHB2ENR = 0x20ff;
+    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
 
-    *(volatile uint32_t *)(0x4002104C) = 0x20ff;    // GPIOG_CLK_ENABLE
-
+    // RCC->APB1ENR1 = 0x32200000;
     *(volatile uint32_t *)(0x40021058) = 0x32200000;
 
+    // GPIOG->GPIOx_OSPEEDR = 0xc3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
 
-    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; //GPIOx_OSPEEDR
-    *(volatile uint32_t *)(0x48001804) = 0x2000; //GPIO port output type register (GPIOx_OTYPER)
-    *(volatile uint32_t *)(0x4800180C) = 0x4000000; //GPIOG_PUPDR
+    // GPIOG->GPIOx_OTYPER = 0x2000;
+    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
 
-    *(volatile uint32_t *)(0x48001824) = 0x400cc0;// Configure Alternate function mapped with the current IO
+    // GPIOG->GPIOx_PUPDR = 0x4000000;
+    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
+
+    // GPIOG->GPIOx_AFRL = 0x400cc0;
+    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
+
+    // GPIOG->GPIOx_MODER = 0x3bebcaaa;
     *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff;  // Configure the IO Speed */
+
+    // GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+
+    // GPIOG->GPIOx_OTYPER = 0x6000;
     *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // activate pull up or pull down GPIO_PUPDR
-    *(volatile uint32_t *)(0x48001824) = 0x4400cc0;// Configure Alternate function mapped with the current IO
+
+    // GPIOA->GPIOx_PUPDR = 0x4000000;
+    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+
+    // GPIOG->GPIOx_AFRL = 0x4400cc0;
+    *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
+
+    // GPIOG->GPIOx_MODER = 0x2bebcaaa;
     *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
 
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff;  /* Configure the IO Speed */
+    // GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+
+    // GPIOG->GPIOx_OTYPER = 0x6000;
     *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
-    *(volatile uint32_t *)(0x4800082C) = 0x0; /* activate pull up or pull down GPIO_PUPDR */
 
-    *(volatile uint8_t *)(0x48001841) = 0x24; //hi2c->State = HAL_I2C_STATE_BUSY;
+    // GPIOA->GPIOx_PUPDR = 0x0;
+    *(volatile uint32_t *)(0x4800082C) = 0x0; // Activate pull up or pull down GPIO_PUPDR
 
+    // *(volatile uint8_t *)(0x48001841) = 0x24; (specific address not covered by provided structures)
+    *(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY;
 
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // Disable the selected I2C peripheral
 
-	*(volatile uint32_t *)(0x40005400) = 0; //Disable the selected I2C peripheral
-	*(volatile uint32_t *)(0x40005410) = 0x20303E5D; //Configure I2Cx: Frequency range
-	*(volatile uint32_t *)(0x40005408) = 0; //I2Cx OAR1 Configuration
-	*(volatile uint32_t *)(0x40005408) = 0x8000; //ack own address1 mode
+    // I2C->I2C_TIMINGR = 0x20303E5D;
+    *(volatile uint32_t *)(0x40005410) = 0x20303E5D; // Configure I2Cx: Frequency range
 
-	*(volatile uint32_t *)(0x40005404) = 0; //Clear the I2C ADD10 bit
-	*(volatile uint32_t *)(0x4000540C) = 0; //I2Cx OAR2 Configuration
-	*(volatile uint32_t *)(0x40005400) = 0; //Configure I2Cx: Generalcall and NoStretch mode
-	*(volatile uint32_t *)(0x40005400) = 1; //Enable the selected I2C peripheral
+    // I2C->I2C_OAR1 = 0;
+    *(volatile uint32_t *)(0x40005408) = 0; // I2Cx OAR1 Configuration
 
+    // I2C->I2C_OAR1 = 0x8000;
+    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
 
+    // I2C->I2C_CR2 = 0;
+    *(volatile uint32_t *)(0x40005404) = 0; // Clear the I2C ADD10 bit
 
-// transmit
-	*(volatile uint32_t *)(0x40005400) = 0; //I2C_CR1, clear
-	*(volatile uint32_t *)(0x40005410) = 0x20303e5d; //595, timing
-	*(volatile uint32_t *)(0x40005408) = 0; //595, OAR1
-	*(volatile uint32_t *)(0x40005408) = 0x8000;
-	*(volatile uint32_t *)(0x40005404) = 0; //616, CR2
-	*(volatile uint32_t *)(0x40004404) = 0x2008000; //618, auto end, bit 15, NACK
-	*(volatile uint32_t *)(0x4000540C) = 0;//623,  OAR2
+    // I2C->I2C_OAR2 = 0;
+    *(volatile uint32_t *)(0x4000540C) = 0; // I2Cx OAR2 Configuration
 
-	*(volatile uint32_t *)(0x40005400) = 1;//634, peripheral enable bit 0
-	*(volatile uint32_t *)(0x40005428) = 0x0;//1162, TX reg,
-	*(volatile uint32_t *)(0x40005404) = 0x2012082; //7217,      82 device address
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // Configure I2Cx: Generalcall and NoStretch mode
 
-	//receive
+    // I2C->I2C_CR1 = 1;
+    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
 
-	uint32_t temp = 0; //I2C_ISR STOPF: STOP detection flag
-	while(((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0){
-	}
+    // Transmit
+    // I2C->I2C_CR1 = 0;
+    *(volatile uint32_t *)(0x40005400) = 0; // I2C_CR1, clear
 
-	*(volatile uint32_t *)(0x40005404) = 0x2012482; //7217 update CR2 register */
+    // I2C->I2C_TIMINGR = 0x20303e5d;
+    *(volatile uint32_t *)(0x40005410) = 0x20303e5d; // 595, timing
 
-	uint32_t busy = 0; //I2C_ISR BUSY: BUSY detection flag
-	while(((busy = *(volatile uint32_t *)(0x40005400)) & 0x8000) == 1){
-	}
+    // I2C->I2C_OAR1 = 0;
+    *(volatile uint32_t *)(0x40005408) = 0; // 595, OAR1
 
-	uint32_t RXNE_BUSY = 0; //RXNE: Receive data register
-	while(((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0){
-	}
+    // I2C->I2C_OAR1 = 0x8000;
+    *(volatile uint32_t *)(0x40005408) = 0x8000;
 
+    // I2C->I2C_CR2 = 0;
+    *(volatile uint32_t *)(0x40005404) = 0; // 616, CR2
 
-	/*
-	 * corrections for printing function
-	 */
-	*(volatile uint32_t *)(0x40021088) = 0x2;
+    // USART->USART_CR2 = 0x2008000;
+    *(volatile uint32_t *)(0x40004404) = 0x2008000; // 618, auto end, bit 15, NACK
 
+    // I2C->I2C_OAR2 = 0;
+    *(volatile uint32_t *)(0x4000540C) = 0; // 623, OAR2
+
+    // I2C->I2C_CR1 = 1;
+    *(volatile uint32_t *)(0x40005400) = 1; // 634, peripheral enable bit 0
+
+    // I2C->I2C_TXDR = 0x0;
+    *(volatile uint32_t *)(0x40005428) = 0x0; // 1162, TX reg
+
+    // I2C->I2C_CR2 = 0x2012082;
+    *(volatile uint32_t *)(0x40005404) = 0x2012082; // 7217, 82 device address
+
+    // Receive
+    uint32_t temp = 0; // I2C_ISR STOPF: STOP detection flag
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
+
+    // I2C->I2C_CR2 = 0x2012482;
+    *(volatile uint32_t *)(0x40005404) = 0x2012482; // 7217 update CR2 register
+
+    uint32_t busy = 0; // I2C_ISR BUSY: BUSY detection flag
+    while (((busy = *(volatile uint32_t *)(0x40005400)) & 0x8000) == 1) {}
+
+    uint32_t RXNE_BUSY = 0; // RXNE: Receive data register
+    while (((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0) {}
+
+    // Corrections for printing function
+    // RCC->CCIPR = 0x2;
+    *(volatile uint32_t *)(0x40021088) = 0x2;
 
     uint32_t received_data = *(volatile uint32_t *)(0x40005424);
     printf("data");
     printf("Received data: 0x%08X\n", received_data);
-
-
 }
 
 static int READ_I2C_IO2(int reg_address)
@@ -320,28 +362,28 @@ static int READ_I2C_IO2(int reg_address)
     I2C_Init();
     uint32_t temp = 0;
 
-    *(volatile uint32_t *)(0x40005428) = reg_address; // Register address
-    // *(volatile uint32_t *)(0x40005428) = value_to_send; // Data to send
+    I2C->I2C_TXDR = reg_address; // Register address
+    // I2C->I2C_TXDR = value_to_send; // Data to send
 
-    *(volatile uint32_t *)(0x40005404) = 0x2012084; // 7217, 82 device address
+    I2C->I2C_CR2 = 0x2012084; // 7217, 82 device address
 
-    //while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+    //while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
 
     // Wait for STOPF
     temp = 0;
-    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
+    while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
 
-    *(volatile uint32_t *)(0x40005404) = 0x2012484; // 7217 update CR2 register
+    I2C->I2C_CR2 = 0x2012484; // 7217 update CR2 register
 
     // Wait for RXNE
     uint32_t RXNE_BUSY = 0;
-    while (((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0) {}
+    while (((RXNE_BUSY = I2C->I2C_ISR) & 0x4) == 0) {}
 
-    uint32_t received_data = *(volatile uint32_t *)(0x40005424);
+    uint32_t received_data = I2C->I2C_RXDR;
 
     // Corrections for printing function
-//	*(volatile uint32_t *)(0x40021088) = 0x2;
-    //printf("Received data: 0x%08X\n", received_data);
+    // RCC->CCIPR = 0x2;
+    // printf("Received data: 0x%08X\n", received_data);
 
     return received_data;
 }
