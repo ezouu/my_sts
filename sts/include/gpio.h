@@ -153,4 +153,26 @@ typedef struct
 
 #define PWR ((PWR_TypeDef *)0x40007000)
 
+typedef struct
+{
+	__IO uint32_t USART_CR1;   // 0x04
+	__IO uint32_t USART_CR2;   // 0x08
+	__IO uint32_t USART_CR3;   // 0x0C
+	__IO uint32_t USART_BRR;   // 0x10
+	__IO uint32_t USART_GTPR;  // 0x14
+	__IO uint32_t USART_RTOR;  // 0x18
+	__IO uint32_t USART_RQR;   // 0x1C
+	__IO uint32_t USART_ISR;   // 0x20
+	__IO uint32_t USART_ICR;   // 0x24
+	__IO uint32_t USART_RDR;   // 0x28
+	__IO uint32_t USART_TDR;   // 0x2C
+
+
+} UART_TypeDef;
+
+
+#define UART ((UART_TypeDef *)0x40010000)
+
+
+
 

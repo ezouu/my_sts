@@ -421,7 +421,7 @@ USART1_IRQHandler:
  	push {r0-r12, lr}
 
 
-	//bl mytest_1
+	bl mytest_1
 
     //ldr r0, =0x40013800      // USART1 base address
     //ldr r1, [r0, #0x1C]      // Read USART1 status register (SR)

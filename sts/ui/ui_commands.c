@@ -220,47 +220,47 @@ void I2C_Init_INIT(void) {
 
 void ui_cmd_I2C(int argc, char *argv[])
 {
-    // RCC->APB2ENR = 0x4001;
-    *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
+    RCC->APB2ENR = 0x4001;
+    // *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
 
-    // RCC->APB1ENR1 = 0x10000000;
-    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
+    RCC->APB1ENR1 = 0x10000000;
+    //*(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
 
-    // RCC->CCIPR = 0;
-    *(volatile uint32_t *)(0x40021088) = 0; // RCC i2c clock selection
+    RCC->CCIPR = 0;
+    //*(volatile uint32_t *)(0x40021088) = 0; // RCC i2c clock selection
 
-    // PWR->PWR_CR2 = 0x200;
-    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
+    PWR->PWR_CR2 = 0x200;
+    //*(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
 
-    // RCC->AHB2ENR = 0x20ff;
-    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
+    RCC->AHB2ENR = 0x20ff;
+    //*(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
 
-    // RCC->APB1ENR1 = 0x32200000;
-    *(volatile uint32_t *)(0x40021058) = 0x32200000;
+    RCC->APB1ENR1 = 0x32200000;
+    //*(volatile uint32_t *)(0x40021058) = 0x32200000;
 
-    // GPIOG->GPIOx_OSPEEDR = 0xc3c0fff;
-    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
+    GPIOG->GPIOx_OSPEEDR = 0xc3c0fff;
+    //*(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
 
-    // GPIOG->GPIOx_OTYPER = 0x2000;
-    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
+    GPIOG->GPIOx_OTYPER = 0x2000;
+    //*(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
 
-    // GPIOG->GPIOx_PUPDR = 0x4000000;
-    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
+    GPIOG->GPIOx_PUPDR = 0x4000000;
+    //*(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
 
-    // GPIOG->GPIOx_AFRL = 0x400cc0;
-    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
+    GPIOG->GPIOx_AFRL = 0x400cc0;
+    //*(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
 
-    // GPIOG->GPIOx_MODER = 0x3bebcaaa;
-    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+    GPIOG->GPIOx_MODER = 0x3bebcaaa;
+    //*(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
 
-    // GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
-    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+    GPIOG->GPIOx_OSPEEDR = 0x3c3c0fff;
+    //*(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
 
-    // GPIOG->GPIOx_OTYPER = 0x6000;
-    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
+    GPIOG->GPIOx_OTYPER = 0x6000;
+    //*(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
 
-    // GPIOA->GPIOx_PUPDR = 0x4000000;
-    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+    GPIOA->GPIOx_PUPDR = 0x4000000;
+    //*(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
 
     // GPIOG->GPIOx_AFRL = 0x4400cc0;
     *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
