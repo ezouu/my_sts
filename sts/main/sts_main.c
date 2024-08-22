@@ -83,7 +83,9 @@ void poll_for_input(char *buffer, int size) {
 
 void sts_main(int a, int b) {
     char input_buffer[BUFFER_SIZE];
+    printf("STS Silicon Testing Software type help to see list of available commands\n");
 
+    register_ui_commands();
 	while(1){
 
 		poll_for_input(input_buffer, BUFFER_SIZE);

@@ -407,11 +407,11 @@ void putstring(char* str)
 
 void putc(char c) {
 
-    volatile uint32_t *usart_isr = &UART->USART_ISR;
+    //volatile uint32_t *usart_isr = &UART->USART_ISR;
     volatile uint32_t *usart_isr = (volatile uint32_t *)(0x40013800 + 0x1C);
 
-    volatile uint32_t *usart_tdr = &UART->USART_TDR;
-    //volatile uint32_t *usart_tdr = (volatile uint32_t *)(0x40013800 + 0x28);
+    //volatile uint32_t *usart_tdr = &UART->USART_TDR;
+    volatile uint32_t *usart_tdr = (volatile uint32_t *)(0x40013800 + 0x28);
 
     if (c == '\n'){
 

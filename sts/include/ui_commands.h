@@ -8,6 +8,7 @@
 typedef struct {
     const char *name;
     void (*function)(int argc, char *argv[]);
+    const char *description;
 } CommandWithArgs;
 
 void register_ui_commands();

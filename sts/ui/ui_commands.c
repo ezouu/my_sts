@@ -9,11 +9,6 @@ void LED_Init();
 */
 #define NULL ((void*)0)
 #define BUFFER_SIZE 100
-void register_ui_commands() {
-
-    simple_command();
-}
-
 
 void simple_command(int argc, char *argv[]);
 void help_command(int argc, char *argv[]);
@@ -24,17 +19,33 @@ void LED_Init(void);
 void ui_cmd_I2C(int argc, char *argv[]);
 static int ui_cmd_joystick(int argc, char *argv[]);
 static int uart_handler(int argc, char *argv[]);
+static int ui_cmd_write_I2C(int argc, char *argv[]);
 
-CommandWithArgs command_list[] = {
-    {"simple", simple_command},
-    {"help", help_command},
-	{"display", ui_cmd_display},
-	{"edit", ui_cmd_edit},
-	{"led", LED_Init},
-	{"i2c", ui_cmd_I2C},
-	{"joystick", ui_cmd_joystick},
-	{"uart", uart_handler},
-};
+
+#define MAX_COMMANDS 50
+CommandWithArgs command_list[MAX_COMMANDS];
+int command_count = 0;
+
+int add_cmd(const char *name, void (*function)(int argc, char *argv[]), const char *description) {
+    command_list[command_count].name = name;
+    command_list[command_count].function = function;
+    command_list[command_count].description = description;
+    command_count++;
+
+    return 0;
+}
+
+void register_ui_commands() {
+    add_cmd("simple", simple_command, "Executes a simple command.");
+    add_cmd("help", help_command, "Displays help information.");
+    add_cmd("display", ui_cmd_display, "Displays memory contents.");
+    add_cmd("edit", ui_cmd_edit, "Edits a memory location.");
+    add_cmd("led", LED_Init, "Initializes the LED.");
+    add_cmd("i2c", ui_cmd_I2C, "Executes an I2C command.");
+    add_cmd("joystick", ui_cmd_joystick, "Handles joystick input.");
+    add_cmd("uart", uart_handler, "Handles UART communication.");
+    add_cmd("i2cwrite", ui_cmd_write_I2C, "Writes to I2C.");
+}
 
 
 
@@ -92,8 +103,8 @@ void simple_command(int argc, char *argv[]) {
 
 void help_command(int argc, char *argv[]) {
     printf("Available commands:\n");
-    for (int i = 0; i < COMMAND_COUNT; i++) {
-        printf("- %s\n", command_list[i].name);
+    for (int i = 0; i < command_count; i++) {
+        printf("- %s: %s\n", command_list[i].name, command_list[i].description);
     }
 }
 
@@ -386,6 +397,65 @@ static int READ_I2C_IO2(int reg_address)
     // printf("Received data: 0x%08X\n", received_data);
 
     return received_data;
+}
+static int ui_cmd_write_I2C(int argc, char *argv[])
+{
+    if (argc < 3) {
+        printf("Usage: write_I2C <reg_address> <value_to_send>\n");
+        return -1;
+    }
+
+    char *reg_input = argv[1];
+    char *val_input = argv[2];
+
+    int reg_address = atoi(reg_input);
+    int value_to_send = atoi(val_input);
+
+    // Initialization and clock configuration
+    I2C_Init_INIT();
+    I2C_Init();
+
+    // Write to I2C
+    uint32_t temp = 0;
+
+    while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
+
+    I2C->I2C_TXDR = reg_address; // Register address
+    I2C->I2C_CR2 = 0x2022082; // I2C device address
+
+    while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
+
+    I2C->I2C_TXDR = value_to_send;
+
+    // Wait for STOPF
+    temp = 0;
+    while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
+
+    // Read back the written value to verify
+    while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
+
+    I2C->I2C_TXDR = reg_address; // Register address
+    I2C->I2C_CR2 = 0x2012082; // I2C device address
+
+    while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
+
+    // Wait for STOPF
+    temp = 0;
+    while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
+
+    I2C->I2C_CR2 = 0x2012482; // Update CR2 register
+
+    // Wait for RXNE
+    uint32_t RXNE_BUSY = 0;
+    while (((RXNE_BUSY = I2C->I2C_ISR) & 0x4) == 0) {}
+
+    uint32_t received_data = I2C->I2C_RXDR;
+
+    // Print results
+    printf("Writing 0x%02X to register 0x%02X\n", value_to_send, reg_address);
+    printf("Received data: 0x%08X\n", received_data);
+
+    return 0;
 }
 
 
