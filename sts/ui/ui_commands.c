@@ -20,6 +20,7 @@ void ui_cmd_I2C(int argc, char *argv[]);
 static int ui_cmd_joystick(int argc, char *argv[]);
 static int uart_handler(int argc, char *argv[]);
 static int ui_cmd_write_I2C(int argc, char *argv[]);
+static int ui_clock_measure(int argc, char *argv[]);
 
 
 #define MAX_COMMANDS 50
@@ -45,6 +46,7 @@ void register_ui_commands() {
     add_cmd("joystick", ui_cmd_joystick, "Handles joystick input.");
     add_cmd("uart", uart_handler, "Handles UART communication.");
     add_cmd("i2cwrite", ui_cmd_write_I2C, "Writes to I2C.");
+    add_cmd("measureclock", ui_clock_measure, "measure clock" );
 }
 
 
@@ -552,5 +554,20 @@ void mytest_1(){
 
 	*/
 }
+
+
+static int ui_clock_measure(int argc, char *argv[]){
+	 RCC->AHB1ENR |= (1 << 0);    // enable GPIOA clock
+	 GPIOA->GPIOx_MODER |= (1 << 17);
+	 GPIOA->GPIOx_MODER &= ~(1 << 16);
+	 GPIOA->GPIOx_AFRL[0] &= ~0xFF;         // the alternate function is selected via GPIOx_AFR registers
+	 GPIOA->GPIOx_AFRL[1] &= ~0xFF;	  // By default the PA8 pin's alternate function is CO01
+	 return 0;
+
+
+}
+
+
+
 
 

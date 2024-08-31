@@ -1,9 +1,9 @@
 
-# Common Firmware Environment (CFE)
+# Silicon Testing Software (STS)
 
 ## Summary
 
-The Common Firmware Environment (CFE) is a versatile firmware platform designed to initialize and manage the hardware of embedded systems. It provides essential services such as bootloading, diagnostics, and hardware abstraction, allowing for smooth interaction between software and hardware components.
+The Common Firmware Environment (STS) is a versatile firmware platform designed to initialize and manage the hardware of embedded systems. It provides essential services such as bootloading, diagnostics, and hardware abstraction, allowing for smooth interaction between software and hardware components.
 
 ## ARM/printf
 
@@ -20,7 +20,7 @@ The ARM source file is responsible for initializing the ARM processor. The file 
 
 ### Overview
 
-The `misccmds` module in CFE provides a collection of miscellaneous commands that enhance the functionality and usability of the firmware environment. These commands cover a wide range of utility functions not categorized under other specific command modules.
+The `misccmds` module in STS provides a collection of miscellaneous commands that enhance the functionality and usability of the firmware environment. These commands cover a wide range of utility functions not categorized under other specific command modules.
 
 ### Key Commands
 
@@ -63,7 +63,7 @@ The `examcmds` commands are implemented in the `ui_examcmds.c` file. Each comman
 
 ### Overview
 
-The `systicktimer` module in CFE is responsible for managing the system tick timer, a critical component for timekeeping and scheduling in embedded systems. It provides precise timing and interrupt handling capabilities.
+The `systicktimer` module in STS is responsible for managing the system tick timer, a critical component for timekeeping and scheduling in embedded systems. It provides precise timing and interrupt handling capabilities.
 
 ### Features
 
@@ -89,7 +89,7 @@ The `resethandler` module manages the system reset functionality, ensuring a con
 
 ### Implementation
 
-The `resethandler` is implemented in the `cfe_resethandler.c` file. It includes functions for initiating and managing the reset process, as well as logging and handling errors.
+The `resethandler` is implemented in the `STS_resethandler.c` file. It includes functions for initiating and managing the reset process, as well as logging and handling errors.
 
 ## Updates
 
@@ -97,4 +97,4 @@ The `resethandler` is implemented in the `cfe_resethandler.c` file. It includes 
 - v0.1 added functionality to USART IRQHandler and fixed bugs where handler was endlessly repeating
 - v0.2 fixed bugs and added documentation
 
-I have started working on my own CFE without the broadcom blueprint. You can follow along at https://github.com/ezouu/my_cfe
+I have started working on my own STS without the broadcom blueprint. You can follow along at https://github.com/ezouu/my_STS
