@@ -111,6 +111,7 @@ Reset_Handler:
   str   r1, [r0]
 
 
+
   /*gpio, set as alt */
   ldr   r0, L__gpio_moder
   mov   r1, 0xa000

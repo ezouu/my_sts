@@ -10,17 +10,24 @@ void LED_Init();
 #define NULL ((void*)0)
 #define BUFFER_SIZE 100
 
+
+#define GPIOA_BASE 0x48000000
+#define GPIOB_BASE 0x48000400
+#define GPIOC_BASE 0x48000800
+
+
 void simple_command(int argc, char *argv[]);
 void help_command(int argc, char *argv[]);
 void led_command(int argc, char *argv[]);
 void ui_cmd_display(int argc, char *argv[]);
 void ui_cmd_edit(int argc, char *argv[]);
-void LED_Init(void);
+void LEDR_Init(int argc, char *argv[]);
 void ui_cmd_I2C(int argc, char *argv[]);
 static int ui_cmd_joystick(int argc, char *argv[]);
 static int uart_handler(int argc, char *argv[]);
 static int ui_cmd_write_I2C(int argc, char *argv[]);
 static int ui_clock_measure(int argc, char *argv[]);
+static int ui_cmd_LEDG(int argc, char *argv[]);
 
 
 #define MAX_COMMANDS 50
@@ -41,12 +48,13 @@ void register_ui_commands() {
     add_cmd("help", help_command, "Displays help information.");
     add_cmd("display", ui_cmd_display, "Displays memory contents.");
     add_cmd("edit", ui_cmd_edit, "Edits a memory location.");
-    add_cmd("led", LED_Init, "Initializes the LED.");
+    add_cmd("ledr", LEDR_Init, "Red LED.");
     add_cmd("i2c", ui_cmd_I2C, "Executes an I2C command.");
     add_cmd("joystick", ui_cmd_joystick, "Handles joystick input.");
     add_cmd("uart", uart_handler, "Handles UART communication.");
     add_cmd("i2cwrite", ui_cmd_write_I2C, "Writes to I2C.");
     add_cmd("measureclock", ui_clock_measure, "measure clock" );
+    add_cmd("ledg", ui_cmd_LEDG, "Green LED" );
 }
 
 
@@ -160,25 +168,80 @@ void ui_cmd_edit(int argc, char *argv[])
 
 }
 
+#define GPIOC_BASE 0x48000800
 
-void LED_Init(void) {
+void LEDR_Init(int argc, char *argv[])
 
-    //RCC_TypeDef *RCC = (RCC_TypeDef *)0x40021000;
+{
+
+	*(volatile uint32_t *)(0x40007004) |= 0x200;
 
 
-    RCC->AHB2ENR |= (1 << 2);
 
+    //RCC->AHB2ENR |= (1 << 2);
+    RCC->AHB2ENR |= 0xF;
     RCC->APB1ENR1 |= (1 << 28);
+    //RCC->APB2ENR |= (1 << 28);
+    *(volatile uint32_t *)(GPIOC_BASE) = 0x4;
+    *(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0; // turn off
 
-    //*(volatile uint32_t *)(GPIOC_BASE) = 0x4;
-    GPIOC->GPIOx_MODER = 0x4;
+    //GPIOC->GPIOx_MODER &= ~(0x3 << (1 * 2));
+    //GPIOC->GPIOx_MODER |= (0x1 << (1 * 2));
 
-
-    //*(volatile uint32_t *)(GPIOC_BASE + 0x14) = 0x0;
-    GPIOC->GPIOx_PUPDR = 0x0;
-
-
+    int state = atoi(argv[1]);
+    volatile uint32_t *GPIOC_ODR = (uint32_t *)(GPIOC_BASE + 0x14);
+    if (state == 1) {
+        GPIOC->GPIOx_ODR &= ~(1 << 1);
+        printf("LED is ON\n");
+    } else if (state == 0) {
+        GPIOC->GPIOx_ODR |= (1 << 1);
+        printf("LED is OFF\n");
+    } else {
+        printf("Invalid state. Use 0 for OFF and 1 for ON.\n");
+    }
 }
+
+void LEDG_Init(void) {
+
+    *(volatile uint32_t *)(0x40007004) = 0x200;
+
+    volatile uint32_t *RCC_AHB2ENR = (uint32_t *)(0x40021000 + 0x4C);
+    *RCC_AHB2ENR = 0xf;
+
+    volatile uint32_t *RCC_APB1ENR1 = (uint32_t *)(0x40021000 + 0x58);
+    *RCC_APB1ENR1 |= (1 << 28);
+
+
+    *(volatile uint32_t *)(GPIOB_BASE + 0)  |= 0x10; //
+
+    *(volatile uint32_t *)(GPIOB_BASE + 0x14) = 0x0;
+}
+
+
+static int ui_cmd_LEDG(int argc, char *argv[]) {
+
+    int state = atoi(argv[1]);
+
+
+    LEDG_Init();
+    volatile uint32_t *GPIOB_ODR = (uint32_t *)(GPIOB_BASE + 0x14);
+
+    if (state == 0) {
+    	*GPIOB_ODR |= (1 << 2);
+        printf("LED1 is OFF\n");
+    } else if (state == 1) {
+        *GPIOB_ODR &= ~(1 << 2);
+        printf("LED1 is ON\n");
+
+    } else{
+    	printf("Invalid state. Use 0 for OFF and 1 for ON.\n");
+
+
+    }
+
+    return 0;
+}
+
 
 
 void I2C_Init(void) {
@@ -557,15 +620,37 @@ void mytest_1(){
 
 
 static int ui_clock_measure(int argc, char *argv[]){
-	 RCC->AHB1ENR |= (1 << 0);    // enable GPIOA clock
-	 GPIOA->GPIOx_MODER |= (1 << 17);
-	 GPIOA->GPIOx_MODER &= ~(1 << 16);
-	 GPIOA->GPIOx_AFRL[0] &= ~0xFF;         // the alternate function is selected via GPIOx_AFR registers
-	 GPIOA->GPIOx_AFRL[1] &= ~0xFF;	  // By default the PA8 pin's alternate function is CO01
-	 return 0;
+
+	*(volatile uint32_t *)(0x40007000) = 0x200;
+
+    RCC->AHB2ENR |= 1;
+
+    RCC->APB1ENR1 |= (1 << 28);
+
+	volatile uint32_t val;
+
+	val = *(volatile uint32_t *)(0x48000000);
+	val &= 0xFFFCFFFF;
+	val |= 0x10000;
+	*(volatile uint32_t *)(0x48000000) = val;
+	//convert to function
+	val = *(volatile uint32_t *)(0x4800000C);
+	val &= 0xFFFCFFFF;
+
+	*(volatile uint32_t *)(0x4800000C) = val;
+
+	val = *(volatile uint32_t *)(0x48000014);
+	val &= 0xFFFCFFFF;
+	val |= 0x10000;
+	*(volatile uint32_t *)(0x48000014) = val;
+
+
+
+	return 0;
 
 
 }
+
 
 
 
