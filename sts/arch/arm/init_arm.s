@@ -374,7 +374,7 @@ SysTick_Handler:
     push {lr}
 
 
-	//bl mytest_1
+	bl mytest_1
 //
     pop {lr}
     pop {r12}

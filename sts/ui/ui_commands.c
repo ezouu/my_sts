@@ -1,6 +1,7 @@
 
 #include <ui_commands.h>
 #include <gpio.h>
+#include<stdint.h>
 /*
 void simple_command();
 void help_command();
@@ -15,6 +16,7 @@ void LED_Init();
 #define GPIOB_BASE 0x48000400
 #define GPIOC_BASE 0x48000800
 
+static int ui_CM(int argc, char *argv[]);
 
 void simple_command(int argc, char *argv[]);
 void help_command(int argc, char *argv[]);
@@ -28,6 +30,7 @@ static int uart_handler(int argc, char *argv[]);
 static int ui_cmd_write_I2C(int argc, char *argv[]);
 static int ui_clock_measure(int argc, char *argv[]);
 static int ui_cmd_LEDG(int argc, char *argv[]);
+static int SysTick_Init(int argc, char *argv[]);
 
 
 #define MAX_COMMANDS 50
@@ -55,6 +58,8 @@ void register_ui_commands() {
     add_cmd("i2cwrite", ui_cmd_write_I2C, "Writes to I2C.");
     add_cmd("measureclock", ui_clock_measure, "measure clock" );
     add_cmd("ledg", ui_cmd_LEDG, "Green LED" );
+    add_cmd("cm", ui_CM, "measure clock" );
+    add_cmd("systick", SysTick_Init, "systick init" );
 }
 
 
@@ -246,6 +251,8 @@ static int ui_cmd_LEDG(int argc, char *argv[]) {
 
 void I2C_Init(void) {
 
+
+
     // Transmit
     I2C->I2C_CR1 = 0; // I2C_CR1, clear
     I2C->I2C_TIMINGR = 0x20303e5d; // I2C timing configuration
@@ -255,6 +262,17 @@ void I2C_Init(void) {
     USART -> USART_CR2 = 0x2008000; // Auto end, bit 15, NACK
     I2C->I2C_OAR2 = 0; // I2C OAR2 configuration
     I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
+/*
+    *(volatile uint32_t *)(0x40005400) = 0; // I2C_CR1, clear
+    *(volatile uint32_t *)(0x40005410) = 0x20303e5d; // I2C timing configuration
+    *(volatile uint32_t *)(0x40005408) = 0; // I2C OAR1 configuration
+    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
+    *(volatile uint32_t *)(0x40005404) = 0; // I2C CR2 configuration
+    *(volatile uint32_t *)(0x40004404) = 0x2008000; // Auto end, bit 15, NACK
+    *(volatile uint32_t *)(0x4000540C) = 0; // I2C OAR2 configuration
+
+    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
+*/
 }
 
 
@@ -291,6 +309,56 @@ void I2C_Init_INIT(void) {
     I2C->I2C_OAR2 = 0; // I2Cx OAR2 Configuration
     I2C->I2C_CR1 = 0; // Configure I2Cx: Generalcall and NoStretch mode
     I2C->I2C_CR1 = 1; // Enable the selected I2C peripheral
+}
+
+void I2C_Init_INIT2(void) {
+    // Initialization and clock configuration
+
+
+
+    *(volatile uint32_t *)(0x40021060) = 0x4001; // __HAL_RCC_SYSCFG_CLK_ENABLE();
+
+
+
+    *(volatile uint32_t *)(0x40021058) = 0x10000000; // __HAL_RCC_PWR_CLK_ENABLE();
+
+  //  *(volatile uint32_t *)(0x40021088) = 0; // RCC I2C clock selection
+
+    *(volatile uint32_t *)(0x40007004) = 0x200; // PWR_CR2 enable
+
+
+    *(volatile uint32_t *)(0x4002104C) = 0x20ff; // GPIOG_CLK_ENABLE
+
+
+    *(volatile uint32_t *)(0x40021058) = 0x32200000;
+
+
+    // GPIO configuration
+    *(volatile uint32_t *)(0x48001808) = 0xc3c0fff; // GPIOx_OSPEEDR
+    *(volatile uint32_t *)(0x48001804) = 0x2000; // GPIO port output type register (GPIOx_OTYPER)
+    *(volatile uint32_t *)(0x4800180C) = 0x4000000; // GPIOG_PUPDR
+    *(volatile uint32_t *)(0x48001824) = 0x400cc0; // Configure Alternate function mapped with the current IO
+    *(volatile uint32_t *)(0x48001800) = 0x3bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
+    *(volatile uint32_t *)(0x4800082C) = 0x4000000; // Activate pull up or pull down GPIO_PUPDR
+    *(volatile uint32_t *)(0x48001824) = 0x4400cc0; // Configure Alternate function mapped with the current IO
+    *(volatile uint32_t *)(0x48001800) = 0x2bebcaaa; // Configure IO Direction mode (Input, Output, Alternate or Analog)
+    *(volatile uint32_t *)(0x48001808) = 0x3c3c0fff; // Configure the IO Speed
+    *(volatile uint32_t *)(0x48001804) = 0x6000; // GPIO_OTYPER
+    *(volatile uint32_t *)(0x4800082C) = 0x0; // Activate pull up or pull down GPIO_PUPDR
+    *(volatile uint8_t *)(0x48001841) = 0x24; // hi2c->State = HAL_I2C_STATE_BUSY
+
+
+    *(volatile uint32_t *)(0x40005400) = 0; // Disable the selected I2C peripheral
+    *(volatile uint32_t *)(0x40005410) = 0x20303E5D; // Configure I2Cx: Frequency range
+    *(volatile uint32_t *)(0x40005408) = 0; // I2Cx OAR1 Configuration
+    *(volatile uint32_t *)(0x40005408) = 0x8000; // Ack own address1 mode
+    *(volatile uint32_t *)(0x40005404) = 0; // Clear the I2C ADD10 bit
+    *(volatile uint32_t *)(0x4000540C) = 0; // I2Cx OAR2 Configuration
+    *(volatile uint32_t *)(0x40005400) = 0; // Configure I2Cx: Generalcall and NoStretch mode
+    *(volatile uint32_t *)(0x40005400) = 1; // Enable the selected I2C peripheral
+
 }
 
 
@@ -438,16 +506,19 @@ static int READ_I2C_IO2(int reg_address)
     I2C_Init();
     uint32_t temp = 0;
 
-    I2C->I2C_TXDR = reg_address; // Register address
+    *(volatile uint32_t *)(0x40005428) = reg_address;
+    //I2C->I2C_TXDR = reg_address; // Register address
     // I2C->I2C_TXDR = value_to_send; // Data to send
 
-    I2C->I2C_CR2 = 0x2012084; // 7217, 82 device address
+    //I2C->I2C_CR2 = 0x2012084; // 7217, 82 device address
+    *(volatile uint32_t *)(0x40005404) = 0x2012084;
 
     //while (((temp = I2C->I2C_ISR) & 0x1) == 0) {}
 
     // Wait for STOPF
     temp = 0;
-    while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
+    //while (((temp = I2C->I2C_ISR) & 0x20) == 0) {}
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
 
     I2C->I2C_CR2 = 0x2012484; // 7217 update CR2 register
 
@@ -535,7 +606,7 @@ static int ui_cmd_joystick(int argc, char *argv[])
 
 */
     // *(volatile uint32_t *)(0x40005404) = 0x12084;
-	I2C_Init_INIT();
+	I2C_Init_INIT2();
 	//*(volatile uint32_t *)(0x40021088) = 0x2;
 
 
@@ -605,6 +676,10 @@ void mytest_1(){
     //printf("%c", USART1_ISR );
     printf("%c", USART1_ICR );
 
+    while(1){
+
+    }
+
 
     //*(volatile uint32_t *)0x40013824 = 0xFFFFFFFF;
     //*USART1_ICR = 0xFFFFFFFF;
@@ -614,7 +689,7 @@ void mytest_1(){
 	volatile uint32_t *LPUART_ISR = (uint32_t *)(0x40013800 + 0x1C);
 	printf("%c", LPUART_ISR);
 	*LPUART_ISR = 0xFFFFFFFF;
-
+yeah
 	*/
 }
 
@@ -623,9 +698,11 @@ static int ui_clock_measure(int argc, char *argv[]){
 
 	*(volatile uint32_t *)(0x40007000) = 0x200;
 
-    RCC->AHB2ENR |= 1;
+    RCC->AHB2ENR |= 0xf;
 
     RCC->APB1ENR1 |= (1 << 28);
+
+
 
 	volatile uint32_t val;
 
@@ -641,18 +718,161 @@ static int ui_clock_measure(int argc, char *argv[]){
 
 	val = *(volatile uint32_t *)(0x48000014);
 	val &= 0xFFFCFFFF;
-	val |= 0x10000;
+	val |= 0x100;
 	*(volatile uint32_t *)(0x48000014) = val;
 
 
 
-	return 0;
 
+    int state = atoi(argv[1]);
 
+    val = *(volatile uint32_t *)(0x48000014);
+
+    if (state == 1) {
+
+    	val |= 0x100;
+    	*(volatile uint32_t *)(0x48000014) = val;
+    	printf("0x%08X\n", val);
+    } else if (state == 0) {
+    	val &= ~0x100;
+    	*(volatile uint32_t *)(0x48000014) = val;
+    	printf("0x%08X\n", val);
+
+    } else{
+    	printf("Invalid state");
+
+    }
+
+    return 0;
 }
 
 
+static int ui_CM(int argc, char *argv[]){
 
 
 
+
+	*(volatile uint32_t *)(0x40007000) = 0x200;
+
+    RCC->AHB2ENR |= 0xf;
+
+    RCC->APB1ENR1 |= (1 << 28);
+
+
+
+	volatile uint32_t val;
+
+	val = *(volatile uint32_t *)(0x48000000);
+	val &= 0xFFFCFFFF;
+	val |= 0x20000;
+	*(volatile uint32_t *)(0x48000000) = val;
+
+	//convert to function
+
+	val = *(volatile uint32_t *)(0x4800000C);
+	val &= 0xFFFCFFFF;
+	*(volatile uint32_t *)(0x4800000C) = val;
+
+
+	val = *(volatile uint32_t *)(0x48000024);
+	val &= 0xFFFFFFF0;
+	*(volatile uint32_t *)(0x48000024) = val;
+
+	RCC ->CFGR |= (2<< 24);
+	RCC ->CFGR |= (4<< 28);
+
+
+
+
+
+    return 0;
+}
+
+
+static int SysTick_Init(int argc, char *argv[]){
+
+	 *(volatile uint32_t *)0xE000ED08 = 0x20000000; // vtor
+
+    *(volatile uint32_t *)0xE000E010 = 0x7; // 00000111
+
+    *(volatile uint32_t *)0xE000E014 = 1000000;
+
+    *(volatile uint32_t *)0xE000E018 = 0;
+
+    *(volatile uint32_t *)0xE000ED20 = 0;
+
+    volatile uint32_t *ptr;
+    uint32_t value;
+
+
+
+
+    uint32_t address = 0xE000E018;
+
+
+	while (1) {
+	    ptr = (volatile uint32_t *)address;
+	    value = *ptr;
+		printf("0x%08X\n", value);
+	    }
+
+
+    return 0;
+}
+
+
+#if 0
+
+#define RCC_BASE_ADDR              0x40021000UL
+#define PWR_BASE_ADDR              0x40007000UL
+
+#define RCC_CFGR_REG_OFFSET        0x08UL
+
+#define RCC_CFGR_REG_ADDR          (RCC_BASE_ADDR + RCC_CFGR_REG_OFFSET )
+
+#define GPIOA_BASE_ADDR            0x48000000UL
+
+static int ui_CM(int argc, char *argv[])
+{
+	uint32_t *pRccCfgrReg =  (uint32_t*) RCC_CFGR_REG_ADDR;
+
+
+	// 1. Configure the RCC_CFGR MCOSEL bit fields to select LSE as clock source: 0111: LSE clock selected
+	*pRccCfgrReg &=~(0U << 27);
+	*pRccCfgrReg |= (1U << 26);
+	*pRccCfgrReg |= (1U << 25);
+	*pRccCfgrReg |= (1U << 24);
+
+	// 2. Configure PA8 to AF0 mode to behave as MCO signal
+	// 2.1 Enable the peripheral clock for GPIOA peripheral - RCC_AHB2ENR
+	uint32_t *pRCCAhb2Enr = (uint32_t*)(RCC_BASE_ADDR + 0x4C);
+	*pRCCAhb2Enr |= (1U << 0); //Enable GPIOA peripheral clock
+
+	// 2.2 Configure the mode of GPIOA pin 8 as alternate function mode - GPIOx_MODER
+	uint32_t *pGPIOAModeReg = (uint32_t*)(GPIOA_BASE_ADDR + 0x00UL);
+	*pGPIOAModeReg &=~(1U << 16); 	// clear bit 16
+	*pGPIOAModeReg |= (1U << 17);   // set bit 17
+
+	// 2.3 Configure the alternation function register to set the mode 0 for PA8 - GPIOx_AFRH
+	uint32_t *pGPIOAAltFunHighReg = (uint32_t*)(GPIOA_BASE_ADDR + 0x24);
+	*pGPIOAAltFunHighReg &=~(1U << 0); // clear bit 0
+	*pGPIOAAltFunHighReg &=~(1U << 1); // clear bit 1
+	*pGPIOAAltFunHighReg &=~(1U << 2); // clear bit 2
+	*pGPIOAAltFunHighReg &=~(1U << 3); // clear bit 3
+
+	// 3. Turn on PWR peripheral clock
+	uint32_t *pRCC_APB1ENR1 = (uint32_t*)(RCC_BASE_ADDR + 0x58);
+	*pRCC_APB1ENR1 |= (1U << 28);
+
+	// 4. Disable backup domain write protection
+	uint32_t *pPWR_CR1 = (uint32_t*)(PWR_BASE_ADDR + 0x00);
+	*pPWR_CR1 |= (1U << 8);
+
+	// 5. Turn on LSE clock (LSEON)
+	uint32_t *pRCC_BDCR = (uint32_t*)(RCC_BASE_ADDR + 0x90);
+	*pRCC_BDCR |= (1U << 0);
+	for (;;);
+}
+
+#endif
 
