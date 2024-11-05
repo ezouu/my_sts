@@ -34,7 +34,8 @@ static int SysTick_Init(int argc, char *argv[]);
 static int i2c_joystick_handler(int argc, char *argv[]);
 void codetest(int argc, char *argv[]);
 
-
+void uart_dump(int argc, char *argv[]);
+void uart_dump2(int argc, char *argv[]);
 #define MAX_COMMANDS 50
 CommandWithArgs command_list[MAX_COMMANDS];
 int command_count = 0;
@@ -64,6 +65,8 @@ void register_ui_commands() {
     add_cmd("systick", SysTick_Init, "systick init" );
     add_cmd("joystick_INT", i2c_joystick_handler, "joystick intertupt" );
     add_cmd("codetest", codetest, "testing functions" );
+    add_cmd("uartdump", uart_dump, "dump char in uart" );
+    add_cmd("uartdump2", uart_dump2, "dump char in uart" );
 }
 
 
@@ -830,6 +833,24 @@ static int i2c_joystick_handler(int argc, char *argv[]) {
 */
 }
 
+
+void uart_dump(int argc, char *argv[]){
+    volatile uint32_t *usart_tdr = (volatile uint32_t *)(0x40013800 + 0x28);
+
+    *usart_tdr = 'a';
+    *usart_tdr = 'b';
+    *usart_tdr = 'c';
+    *usart_tdr = 'd';
+}
+void uart_dump2(int argc, char *argv[]){
+    uint32_t *usart_tdr = (uint32_t *)(0x40013800 + 0x28);
+
+    *usart_tdr = 'a';
+    *usart_tdr = 'b';
+    *usart_tdr = 'c';
+    *usart_tdr = 'd';
+
+}
 static int uart_handler(int argc, char *argv[]){
 
 	*(volatile uint32_t *)0xE000ED08 = 0x20000000;
