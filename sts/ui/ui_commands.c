@@ -31,6 +31,8 @@ static int ui_cmd_write_I2C(int argc, char *argv[]);
 static int ui_clock_measure(int argc, char *argv[]);
 static int ui_cmd_LEDG(int argc, char *argv[]);
 static int SysTick_Init(int argc, char *argv[]);
+static int i2c_joystick_handler(int argc, char *argv[]);
+void codetest(int argc, char *argv[]);
 
 
 #define MAX_COMMANDS 50
@@ -60,6 +62,8 @@ void register_ui_commands() {
     add_cmd("ledg", ui_cmd_LEDG, "Green LED" );
     add_cmd("cm", ui_CM, "measure clock" );
     add_cmd("systick", SysTick_Init, "systick init" );
+    add_cmd("joystick_INT", i2c_joystick_handler, "joystick intertupt" );
+    add_cmd("codetest", codetest, "testing functions" );
 }
 
 
@@ -607,7 +611,6 @@ static int ui_cmd_joystick(int argc, char *argv[])
 */
     // *(volatile uint32_t *)(0x40005404) = 0x12084;
 	I2C_Init_INIT2();
-	//*(volatile uint32_t *)(0x40021088) = 0x2;
 
 
     while(1){
@@ -635,6 +638,197 @@ static int ui_cmd_joystick(int argc, char *argv[])
     return 0;
 }
 
+static int write_I2C_IO2(int reg_address, int value_to_send)
+{
+
+	I2C_Init();
+
+    // Write to I2C
+
+    // Corrections for printing function
+    //*(volatile uint32_t *)(0x40021088) = 0x2;
+
+    //printf("Writing 0x%02X to register 0x%02X", value_to_send, reg_address);
+
+    // RECorrections for printing function
+    //*(volatile uint32_t *)(0x40021088) = 0; // RCC I2C clock selection
+    uint32_t temp = 0;
+
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+
+    *(volatile uint32_t *)(0x40005428) = reg_address; // Register address
+    // *(volatile uint32_t *)(0x40005428) = value_to_send; // Data to send
+
+    *(volatile uint32_t *)(0x40005404) = 0x2022084; // 7217, 82 device address
+
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+
+    *(volatile uint32_t *)(0x40005428) = value_to_send;
+    // Wait for STOPF
+    temp = 0;
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
+
+    //*(volatile uint32_t *)(0x40005404) |= 0x80000000; // Set STOP bit in I2C_CR2 to clear STOPF flag
+
+    // Read back the written value to verify
+    // Corrections for printing function
+    //*(volatile uint32_t *)(0x40021088) = 0x2;
+
+    //printf("Reading back register 0x%02X", reg_address);
+
+    // RECorrections for printing function
+    //*(volatile uint32_t *)(0x40021088) = 0; // RCC I2C clock selection
+
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+
+    *(volatile uint32_t *)(0x40005428) = reg_address; // Register address
+    // *(volatile uint32_t *)(0x40005428) = value_to_send; // Data to send
+
+    *(volatile uint32_t *)(0x40005404) = 0x2012084; // 7217, 82 device address
+
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x1) == 0) {}
+
+    // Wait for STOPF
+    temp = 0;
+    while (((temp = *(volatile uint32_t *)(0x40005418)) & 0x20) == 0) {}
+
+    *(volatile uint32_t *)(0x40005404) = 0x2012484; // 7217 update CR2 register
+
+    // Wait for RXNE
+    uint32_t RXNE_BUSY = 0;
+    while (((RXNE_BUSY = *(volatile uint32_t *)(0x40005418)) & 0x4) == 0) {}
+
+    uint32_t received_data = *(volatile uint32_t *)(0x40005424);
+
+    // Corrections for printing function
+	*(volatile uint32_t *)(0x40021088) = 0x2;
+	printf("Writing 0x%02X to register 0x%02X\n", value_to_send, reg_address);
+    printf("Received data: 0x%08X\n", received_data);
+
+
+
+    return 0;
+}
+
+// #define GPIOA ((GPIOX_TypeDef *)0x48000000) &= << |= <<
+//#define GPIOB ((GPIOX_TypeDef *)0x48000400)
+//#define GPIOC ((GPIOX_TypeDef *)0x48000800)
+//#define GPIOG ((GPIOX_TypeDef *)0x48001800)
+
+static void write_GPIOx_MODER(int gpio_address, int pin_idx, int mode) {
+
+	*(volatile uint32_t *)(0x40007004) = 0x200;
+
+    volatile uint32_t *RCC_AHB2ENR = (uint32_t *)(0x40021000 + 0x4C);
+    *RCC_AHB2ENR = 0xf;
+
+    volatile uint32_t *RCC_APB1ENR1 = (uint32_t *)(0x40021000 + 0x58);
+    *RCC_APB1ENR1 |= (1 << 28);
+
+
+	volatile uint32_t *GPIO_MODER = (volatile uint32_t *)(gpio_address);
+    int pos = pin_idx * 2;
+
+    *GPIO_MODER &= ~(0x3 << pos);
+
+    *GPIO_MODER |= (mode << pos);
+
+
+    printf("Written mode %d to GPIO at address 0x%08X, pin %d\n", mode, gpio_address, pin_idx);
+}
+static void write_GPIOx_PUPDR(int gpio_address, int pin_idx, int pupdr_mode) {
+	*(volatile uint32_t *)(0x40007004) = 0x200;
+
+    volatile uint32_t *RCC_AHB2ENR = (uint32_t *)(0x40021000 + 0x4C);
+    *RCC_AHB2ENR = 0xf;
+
+    volatile uint32_t *RCC_APB1ENR1 = (uint32_t *)(0x40021000 + 0x58);
+    *RCC_APB1ENR1 |= (1 << 28);
+
+    volatile uint32_t *GPIO_PUPDR = (volatile uint32_t *)(gpio_address + 0x0C);
+
+
+    int pos = pin_idx * 2;
+
+
+    *GPIO_PUPDR &= ~(0x3 << pos);
+
+
+    *GPIO_PUPDR |= (pupdr_mode << pos);
+
+    printf("Written PUPDR mode %d to GPIO at address 0x%08X, pin %d\n", pupdr_mode, gpio_address, pin_idx);
+}
+static int read_GPIOx_IDX(int gpio_address, int idx, int gpio_register)
+{
+	//write_GPIOx_PUPDR(gpio_address, idx, 1);
+	write_GPIOx_MODER(gpio_address, idx, 0);
+
+
+	volatile uint32_t *GPIO_IDR = (volatile uint32_t *)(gpio_address + gpio_register);
+
+
+    uint32_t pin_value = (*GPIO_IDR >> idx) & 0x1;
+
+
+    printf("Reading GPIO at address 0x%08X, pin %d: %d\n", (gpio_address + gpio_register), idx, pin_value);
+
+    return pin_value;
+}
+
+void codetest(int argc, char *argv[]){
+	//write_GPIOx_MODER(0x48001800, 15, 1);
+    int x = read_GPIOx_IDX(0x48000800, 13, 0);
+    printf("GPIO PG15 state: %d\n", x);
+    int pg15_state = read_GPIOx_IDX(0x48000800, 13, 0x10);
+    printf("GPIO PG15 state: %d\n", pg15_state);
+}
+
+static int i2c_joystick_handler(int argc, char *argv[]) {
+
+	I2C_Init_INIT2();
+
+	write_I2C_IO2(0x08,0x0F);
+
+    uint32_t interrupt_status_lsb = READ_I2C_IO2(0x08);
+    uint32_t interrupt_status_msb = READ_I2C_IO2(0x09);
+
+    printf("LSB 0x%02X\n", interrupt_status_lsb);
+    printf("MSB 0x%02X\n", interrupt_status_msb);
+
+    uint32_t ISGPIOR_lsb = READ_I2C_IO2(0x0A);
+    uint32_t ISGPIOR_msb = READ_I2C_IO2(0x0B);
+
+    printf("ISGPIOR_LSB 0x%02X\n", ISGPIOR_lsb);
+    printf("ISGPIOR_MSB 0x%02X\n", ISGPIOR_msb);
+
+    int pg15_state = read_GPIOx_IDX(0x48001800, 15, 0x10);
+    printf("GPIO PG15 state: %d\n", pg15_state);
+
+    return 0;
+
+
+ /*
+    if (interrupt_status & 0x01) {
+        uint32_t joystick_state = READ_I2C_IO2(0x10);
+
+        if ((joystick_state & 1) == 0) {
+            printf("SEL\r");
+        }
+        if ((joystick_state & 2) == 0) {
+            printf("DOWN\r");
+        }
+        if ((joystick_state & 4) == 0) {
+            printf("LEFT\r");
+        }
+        if ((joystick_state & 8) == 0) {
+            printf("RIGHT\r");
+        }
+        if ((joystick_state & 16) == 0) {
+            printf("UP\r");
+        }
+    }
+*/
+}
 
 static int uart_handler(int argc, char *argv[]){
 
