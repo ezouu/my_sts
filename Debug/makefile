@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 test_cfe.list \
 
+OBJCOPY_BIN += \
+test_cfe.bin \
+
 
 # All Target
 all: main-build
@@ -75,12 +78,17 @@ test_cfe.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+test_cfe.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "test_cfe.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) default.size.stdout test_cfe.elf test_cfe.list test_cfe.map
+	-$(RM) default.size.stdout test_cfe.bin test_cfe.elf test_cfe.list test_cfe.map
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

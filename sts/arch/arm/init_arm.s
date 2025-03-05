@@ -9,7 +9,7 @@
 
 
 g_pfnVectors:
-	.long 0x20002000       //0
+	.long 0x20002000      //0
 	.long Reset_Handler    //1
 	.long 0x11             //2
 	.long 0x22             //3
@@ -71,7 +71,7 @@ g_pfnVectors:
 
 
 Reset_Handler:
-
+ //ldr   r7, =_estack
  ldr   sp, =_estack    /* Set stack pointer */
 
 /* Zero fill the bss segment. */
