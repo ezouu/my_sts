@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-from stm32_utils import STM32Utils
+import os
+import sys
 import time
 import serial.tools.list_ports
+
+# Add the current directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from stm32_utils import STM32Utils
 
 def test_led_commands():
     # Use the direct USB serial port
@@ -41,4 +47,6 @@ def test_led_commands():
         print("ls -l /dev/cu.*")
 
 if __name__ == "__main__":
+    # Change to the script's directory
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     test_led_commands() 
