@@ -1,0 +1,47 @@
+# Build directories
+Debug/
+Release/
+build/
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# STM32CubeIDE specific
+.metadata/
+.settings/
+*.launch
+*.cproject
+*.project
+*.mxproject
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.env
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~ 
