@@ -1,9 +1,40 @@
-
 # Silicon Testing Software (STS)
 
 ## Summary
 
 The Common Firmware Environment (STS) is a versatile firmware platform designed to initialize and manage the hardware of embedded systems. It provides essential services such as bootloading, diagnostics, and hardware abstraction, allowing for smooth interaction between software and hardware components.
+
+## Python Testing Tools
+
+### Overview
+
+The project includes Python-based testing tools for communicating with the STM32 board through serial interface. These tools provide a convenient way to test and control the board's functionality, particularly for LED control and system diagnostics.
+
+### Key Features
+
+- **Serial Communication:** Establishes reliable communication with the STM32 board via USB-to-Serial converter
+- **LED Control:** Supports commands for controlling board LEDs (e.g., `ledr 1`, `ledg 0`)
+- **Command Interface:** Provides a clean interface for sending commands and receiving responses
+- **Error Handling:** Includes robust error handling and connection management
+
+### Files
+
+- **`stm32_utils.py`:** Core utility class for STM32 board communication
+- **`test_communication.py`:** Test script for verifying board communication
+- **`test_leds.py`:** Script for testing LED functionality
+
+### Usage
+
+1. Ensure the STM32 board is connected via USB-to-Serial converter
+2. Install required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the test scripts:
+   ```bash
+   python3 test_communication.py
+   python3 test_leds.py
+   ```
 
 ## ARM/printf
 
