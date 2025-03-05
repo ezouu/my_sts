@@ -1,0 +1,2 @@
+pyserial>=3.5
+typing-extensions>=4.0.0 

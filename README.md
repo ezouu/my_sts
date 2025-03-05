@@ -6,9 +6,9 @@ The Common Firmware Environment (STS) is a versatile firmware platform designed 
 
 ## Python Testing Tools
 
-### Overview
-
 The project includes Python-based testing tools for communicating with the STM32 board through serial interface. These tools provide a convenient way to test and control the board's functionality, particularly for LED control and system diagnostics.
+
+See the [python_tests](python_tests/README.md) directory for detailed documentation and usage instructions.
 
 ### Key Features
 
