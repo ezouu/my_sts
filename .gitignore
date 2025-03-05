@@ -33,6 +33,7 @@ venv/
 ENV/
 env/
 .env
+get-pip.py
 
 # macOS specific
 .DS_Store
