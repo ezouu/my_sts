@@ -7,6 +7,7 @@ This directory contains Python scripts for testing and controlling the STM32 boa
 - `stm32_utils.py`: Core utility class for STM32 board communication
 - `test_communication.py`: Test script for verifying board communication
 - `test_leds.py`: Script for testing LED functionality
+- `test_advanced.py`: Script for testing advanced board features
 - `requirements.txt`: Python package dependencies
 
 ## Setup
@@ -39,6 +40,23 @@ This script tests LED control functionality using commands like:
 - `ledr 0`: Turn off red LED
 - `ledg 1`: Turn on green LED
 - `ledg 0`: Turn off green LED
+
+### Testing Advanced Features
+```bash
+python3 test_advanced.py
+```
+This script tests various advanced board features:
+- I2C Operations:
+  - `writei2c`: Write to I2C devices
+  - `displayi2c`: Read from I2C devices
+  - `writei2cio2`: Write and display I2C values
+- Joystick:
+  - `joystick`: Initialize and read joystick input
+- Systick Timer:
+  - `systick`: Initialize and monitor system tick timer
+- Memory Operations:
+  - `display`: View memory contents
+  - `edit`: Modify memory values
 
 ## Port Configuration
 
