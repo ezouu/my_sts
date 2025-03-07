@@ -23,18 +23,6 @@ See the [python_tests](python_tests/README.md) directory for detailed documentat
 - **`test_communication.py`:** Test script for verifying board communication
 - **`test_leds.py`:** Script for testing LED functionality
 
-### Usage
-
-1. Ensure the STM32 board is connected via USB-to-Serial converter
-2. Install required Python packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the test scripts:
-   ```bash
-   python3 test_communication.py
-   python3 test_leds.py
-   ```
 
 ## ARM/printf
 
@@ -127,5 +115,5 @@ The `resethandler` is implemented in the `STS_resethandler.c` file. It includes 
 - v0.0 updated readme 
 - v0.1 added functionality to USART IRQHandler and fixed bugs where handler was endlessly repeating
 - v0.2 fixed bugs and added documentation
+- v0.3 added python scripting samples that directly integrate with my code
 
-I have started working on my own STS without the broadcom blueprint. You can follow along at https://github.com/ezouu/my_STS
