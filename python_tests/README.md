@@ -8,6 +8,8 @@ This directory contains Python scripts for testing and controlling the STM32 boa
 - `test_communication.py`: Test script for verifying board communication
 - `test_leds.py`: Script for testing LED functionality
 - `test_advanced.py`: Script for testing advanced board features
+- `test_native.py`: Basic native function testing through C interface
+- `test_native_advanced.py`: Advanced native function testing with comprehensive test cases
 - `requirements.txt`: Python package dependencies
 
 ## Setup
@@ -57,6 +59,54 @@ This script tests various advanced board features:
 - Memory Operations:
   - `display`: View memory contents
   - `edit`: Modify memory values
+
+### Native Function Testing
+```bash
+python3 test_native.py
+```
+This script provides basic testing of native C functions through the Python interface:
+- LED control functions
+- Basic I2C operations
+- Simple joystick reading
+- Basic SysTick timer operations
+- Memory read/write operations
+
+### Advanced Native Function Testing
+```bash
+python3 test_native_advanced.py
+```
+This script provides comprehensive testing with advanced test cases:
+
+1. **LED Pattern Testing**
+   - Alternating LED patterns
+   - Morse code SOS pattern
+   - Custom pattern support with timing control
+
+2. **I2C Stress Testing**
+   - Random value write/read verification
+   - Boundary value testing (0x00, 0xFF, 0x55, 0xAA)
+   - Multiple consecutive operations
+
+3. **Advanced Joystick Testing**
+   - Rapid read testing (50 reads with 10ms intervals)
+   - Unique position detection
+   - Stuck position analysis
+
+4. **SysTick Precision Testing**
+   - Interval measurement and analysis
+   - Average interval calculation
+   - Maximum deviation tracking
+
+5. **Memory Pattern Testing**
+   - Various bit patterns (zeros, ones, alternating)
+   - Ascending/descending patterns
+   - Sequential address testing
+
+The advanced test suite includes:
+- Automated test execution
+- Test result tracking
+- Detailed failure reporting
+- Test summary generation
 
 ## Port Configuration
 
